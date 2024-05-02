@@ -159,7 +159,7 @@ const Register = () => {
           </button>
         </form>
         <p className='mt-4'>
-          Already have an account?{' '}
+          Already have an account?
           <Link to='/signin' className='text-blue-500'>
             Log in
           </Link>
