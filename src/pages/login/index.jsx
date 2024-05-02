@@ -1,9 +1,9 @@
 // Pages/Signinpage.jsx
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import signimage from '../assets/signupimage.jpeg'
+import signimage from '../../assets/signupimage.jpeg'
 
-const SignInPage = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -77,4 +77,4 @@ const SignInPage = () => {
   )
 }
 
-export default SignInPage
+export default Login

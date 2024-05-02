@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import HomePage from './Pages/Homepage.jsx'
-import SignInPage from './Pages/Signinpage.jsx'
-import SignUpPage from './Pages/Signuppage.jsx'
-import MainPage from './Pages/Postpage.jsx'
+import Welcome from './pages/welcome/index.jsx'
+import Login from './pages/login/index.jsx'
+import Register from './pages/register/index.jsx'
+import Home from './pages/home/index.jsx'
 
 function App() {
   return (
@@ -15,17 +15,16 @@ function App() {
         <div className='container mx-auto flex-grow p-4'>
           {
             <Routes>
-              <Route path='/' element={<HomePage />} />
-              <Route path='/signin' element={<SignInPage />} />
-              <Route path='/signup' element={<SignUpPage />} />
-              <Route path='/main' element={<MainPage />} />
+              <Route path='/' element={<Welcome />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/home' element={<Home />} />
             </Routes>
           }
         </div>
         <div>
           <footer className=' flex flex-col bg-orange-300 p2 min-h-14 justify-center items-center'>
             <h1 className='text to-white text-2xl'>
-              {' '}
               Allrights reserved by StudentconnectHKR
             </h1>
           </footer>

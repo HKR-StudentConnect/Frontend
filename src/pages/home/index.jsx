@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Postpage = () => {
+const Home = () => {
   return (
     <div>
       <h1>Welcome to Student Connect</h1>
@@ -8,4 +8,4 @@ const Postpage = () => {
   )
 }
 
-export default Postpage
+export default Home

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import introimage from '../assets/intro.jpg'
+import introimage from '../../assets/intro.jpg'
 
-const Homepage = () => {
+const Welcome = () => {
   const quotes = [
     'Missing out the chill in your life? lets connect!',
     'Stay in loop and connect with Pears.',
@@ -23,13 +23,13 @@ const Homepage = () => {
       <h1 className='text-3xl font-bold mb-4'>Welcome to Student Connect</h1>
       <div className='mt-4'>
         <Link
-          to='/signup'
+          to='/register'
           className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4'
         >
           Sign Up
         </Link>
         <Link
-          to='/signin'
+          to='/login'
           className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
         >
           Log In
@@ -41,4 +41,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default Welcome

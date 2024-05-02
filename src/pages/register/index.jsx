@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import signupimage from '../assets/signupimage.jpeg'
+import signupimage from '../../assets/signupimage.jpeg'
 
-const SignupPage = () => {
+const Register = () => {
   const [data, setData] = useState({
     name: '',
     age: '',
@@ -169,4 +169,4 @@ const SignupPage = () => {
   )
 }
 
-export default SignupPage
+export default Register
