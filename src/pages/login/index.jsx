@@ -1,9 +1,10 @@
 // Pages/Signinpage.jsx
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import signimage from '../../assets/signupimage.jpeg'
 
 const Login = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -14,10 +15,28 @@ const Login = () => {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = event => {
+  async function submit(event) {
     event.preventDefault()
-    // Handle form submission (send data to backend)
     console.log('Form submitted:', formData)
+
+    const obj = {
+      email: formData.email,
+      password: formData.password,
+    }
+
+    const response = await fetch('http://localhost:5000/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
+    })
+
+    if (response.ok) {
+      const jsonData = await response.json()
+      console.log(jsonData)
+      navigate('/home', { state: { user: jsonData.user } })
+    }
   }
 
   return (
@@ -32,7 +51,7 @@ const Login = () => {
       <div className='ml-8'>
         <h2 className='text-2xl font-bold mb-4'>Log In</h2>
 
-        <form onSubmit={handleSubmit} className='mt-4'>
+        <form onSubmit={submit} className='mt-4'>
           <div className='mb-4'>
             <label htmlFor='email' className='block text-gray-700'>
               Email

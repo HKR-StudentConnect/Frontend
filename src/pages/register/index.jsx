@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import signupimage from '../../assets/signupimage.jpeg'
 
 const Register = () => {
+  const navigate = useNavigate()
   const [data, setData] = useState({
     name: '',
     age: '',
@@ -23,11 +24,33 @@ const Register = () => {
     }
   }
 
-  const handleSubmit = event => {
+  async function submit(event) {
     event.preventDefault()
-    // Handle form submission (send data to backend)
     console.log('Form submitted:', data)
-    alert('Form submitted')
+
+    const obj = {
+      username: data.username,
+      email: data.email,
+      phoneNumber: data.phone,
+      password: data.password,
+      profile: {
+        name: data.name,
+      },
+    }
+
+    const response = await fetch('http://localhost:5000/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj),
+    })
+
+    if (response.ok) {
+      const jsonData = await response.json()
+      console.log(jsonData)
+      navigate('/home', { state: { user: jsonData.user } })
+    }
   }
 
   return (
@@ -39,8 +62,7 @@ const Register = () => {
           alt='Sign Up Img'
           className='h-64 w-128 object-cover rounded-full mb-8'
         />
-        <form onSubmit={handleSubmit} className='w-full max-w-md'></form>
-        <form onSubmit={handleSubmit} className='w-full max-w-md'>
+        <form onSubmit={submit} className='w-full max-w-md'>
           <div className='mb-4'>
             <label htmlFor='name' className='block text-gray-700'>
               Name
@@ -54,7 +76,7 @@ const Register = () => {
               className='form-input mt-1 block w-full'
             />
           </div>
-          <div className='mb-4'>
+          {/* <div className='mb-4'>
             <label htmlFor='age' className='block text-gray-700'>
               Age
             </label>
@@ -66,20 +88,7 @@ const Register = () => {
               onChange={handleChange}
               className='form-input mt-1 block w-full'
             />
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='phone' className='block text-gray-700'>
-              Phone
-            </label>
-            <input
-              type='text'
-              id='phone'
-              name='phone'
-              value={data.phone}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
-            />
-          </div>
+          </div> */}
           <div className='mb-4'>
             <label htmlFor='username' className='block text-gray-700'>
               Username
@@ -102,6 +111,19 @@ const Register = () => {
               id='email'
               name='email'
               value={data.email}
+              onChange={handleChange}
+              className='form-input mt-1 block w-full'
+            />
+          </div>
+          <div className='mb-4'>
+            <label htmlFor='phone' className='block text-gray-700'>
+              Phone number
+            </label>
+            <input
+              type='text'
+              id='phone'
+              name='phone'
+              value={data.phone}
               onChange={handleChange}
               className='form-input mt-1 block w-full'
             />
