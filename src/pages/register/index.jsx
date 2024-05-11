@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import AuthInput from '../../components/auth/authInput'
+import { useDispatch } from 'react-redux'
+import { registerAndSetUser } from '../../store/actions/userActions'
 
 const Register = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [data, setData] = useState({
     name: '',
@@ -27,7 +30,6 @@ const Register = () => {
 
   async function submit(event) {
     event.preventDefault()
-    console.log('Form submitted:', data)
 
     const obj = {
       username: data.username,
@@ -38,19 +40,16 @@ const Register = () => {
         name: data.name,
       },
     }
+    console.log('Form submitted:', JSON.stringify(obj))
 
-    const response = await fetch('http://localhost:5000/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(obj),
-    })
-
-    if (response.ok) {
-      const jsonData = await response.json()
-      console.log(jsonData)
-      navigate('/home', { state: { user: jsonData.user } })
+    try {
+      const result = await dispatch(registerAndSetUser(obj))
+      console.log(result)
+      if (result.success) {
+        navigate('/')
+      }
+    } catch (err) {
+      console.error('Login failed:', err)
     }
   }
 
@@ -65,7 +64,7 @@ const Register = () => {
         </div>
 
         <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-sm'>
-          <form className='space-y-6' action='#' method='POST'>
+          <form className='space-y-6' onSubmit={submit}>
             <AuthInput
               label={'Name'}
               value={data.name}
@@ -135,7 +134,6 @@ const Register = () => {
             <div>
               <button
                 type='submit'
-                onSubmit={submit}
                 className='flex w-full justify-center rounded-lg bg-secondary px-3 py-3 text-md font-semibold leading-6 text-black'
               >
                 Sign up
