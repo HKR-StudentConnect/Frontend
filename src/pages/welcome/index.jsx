@@ -12,31 +12,35 @@ const Welcome = () => {
   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
 
   return (
-    <div className='bg-green-400 min-h-0 pt-32 flex flex-col justify-center items-center'>
-      <div className='bg-white rounded-full h-64 w-64 flex justify-center items-center'>
+    <div className='bg-primary min-h-screen flex flex-col justify-center items-center'>
+      <div className='bg-white rounded-full h-64 w-64  mb-8 flex justify-center items-center'>
         <img
           src={introimage}
           alt='myimage'
           className='h-full w-full object-cover rounded-full'
         />
       </div>
-      <h1 className='text-3xl font-bold mb-4'>Welcome to Student Connect</h1>
-      <div className='mt-4'>
+      <h1 className='text-3xl text-white font-bold mb-8'>
+        Welcome to Student Connect
+      </h1>
+      <div className='flex'>
         <Link
           to='/register'
-          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4'
+          className='bg-secondary hover:bg-blue-700 text-black font-bold py-4 px-16 rounded-xl mr-4'
         >
           Sign Up
         </Link>
         <Link
           to='/login'
-          className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+          className='bg-secondary hover:bg-blue-700 text-black font-bold py-4 px-16 rounded-xl'
         >
-          Log In
+          Sign In
         </Link>
       </div>
 
-      <div className='mt-4 italic'>{randomQuote}</div>
+      <div className='mt-8 font-semibold italic text-background'>
+        {randomQuote}
+      </div>
     </div>
   )
 }

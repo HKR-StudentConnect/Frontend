@@ -1,35 +1,54 @@
-import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Welcome from './pages/welcome/index.jsx'
 import Login from './pages/login/index.jsx'
 import Register from './pages/register/index.jsx'
 import Home from './pages/home/index.jsx'
+import Notifications from './pages/notifications/index.jsx'
+import Profile from './pages/profile/index.jsx'
+import Settings from './pages/settings/index.jsx'
+import RequireAuth from '../src/components/requireAuth.jsx'
 
 function App() {
   return (
     <Router>
-      <div className=' flex flex-col bg-green-400 min-h-screen'>
-        <header className='bg-green-800 p-4'>
-          <h1 className='text-white text-2xl'>Student Connect </h1>
-        </header>
-        <div className='container mx-auto flex-grow p-4'>
-          {
-            <Routes>
-              <Route path='/' element={<Welcome />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
-              <Route path='/home' element={<Home />} />
-            </Routes>
+      <Routes>
+        <Route path='/welcome' element={<Welcome />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route
+          path='/'
+          element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
           }
-        </div>
-        <div>
-          <footer className=' flex flex-col bg-orange-300 p2 min-h-14 justify-center items-center'>
-            <h1 className='text to-white text-2xl'>
-              Allrights reserved by StudentconnectHKR
-            </h1>
-          </footer>
-        </div>
-      </div>
+        />
+        <Route
+          path='/notifications'
+          element={
+            <RequireAuth>
+              <Notifications />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/profile'
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/settings'
+          element={
+            <RequireAuth>
+              <Settings />
+            </RequireAuth>
+          }
+        />
+        <Route path='*' element={<Welcome />} />
+      </Routes>
     </Router>
   )
 }
