@@ -1,10 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const MenuItem = ({ title }) => {
+const MenuItem = ({ title, to }) => {
   return (
-    <button className='text-lg font-medium text-white hover:font-bold hover:text-secondary py-2 px-4'>
+    <Link
+      to={to}
+      className='text-lg font-medium text-white hover:font-bold hover:text-secondary py-2 px-4'
+    >
       {title}
-    </button>
+    </Link>
   )
 }
 

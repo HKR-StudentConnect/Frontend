@@ -11,10 +11,10 @@ const Navbar = () => {
             <img src={logo} alt='John Doe' className='rounded-full h-16 w-16' />
           </div>
           <div className='flex gap-2'>
-            <MenuItem title={'Home'} />
-            <MenuItem title={'Notifications'} />
-            <MenuItem title={'My Profile'} />
-            <MenuItem title={'Settings'} />
+            <MenuItem title={'Home'} to={'/'} />
+            <MenuItem title={'Notifications'} to={'notifications'} />
+            <MenuItem title={'My Profile'} to={'profile'} />
+            <MenuItem title={'Settings'} to={'settings'} />
             <MenuItem title={'Sign Out'} />
           </div>
           <div className='flex border-2 border-white rounded overflow-hidden'>
