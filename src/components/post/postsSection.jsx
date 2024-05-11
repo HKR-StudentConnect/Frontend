@@ -1,11 +1,19 @@
-import React from 'react'
+// src/components/PostsSection.js
+import React, { useState } from 'react'
 import Post from './post'
 import CreatePostButton from './createPostButton'
+import CreatePostModal from './createPostModal'
 
 const PostsSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+
   return (
     <div className='w-full'>
-      <CreatePostButton />
+      <CreatePostButton onClick={openModal} />
+      <CreatePostModal show={isModalOpen} onClose={closeModal} />
 
       <div>
         <Post
