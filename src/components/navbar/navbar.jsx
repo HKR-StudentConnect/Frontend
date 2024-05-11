@@ -21,7 +21,7 @@ const Navbar = () => {
             <input
               type='text'
               placeholder='Search...'
-              className='px-4 py-2 w-80 text-black'
+              className='px-4 py-2 w-80 text-black border-none'
               onKeyUp={e => {
                 if (e.key === 'Enter') console.log(e.target.value)
               }}
