@@ -1,8 +1,19 @@
 import React from 'react'
 import MenuItem from './menuItem'
 import logo from '../../assets/logo.png'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { userLogout } from '../../store/actions/userActions'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    dispatch(userLogout())
+    navigate('/welcome')
+  }
+
   return (
     <nav className='bg-primary'>
       <div className='container mx-auto flex-grow px-12 py-6'>
@@ -12,10 +23,15 @@ const Navbar = () => {
           </div>
           <div className='flex gap-2'>
             <MenuItem title={'Home'} to={'/'} />
-            <MenuItem title={'Notifications'} to={'notifications'} />
-            <MenuItem title={'My Profile'} to={'profile'} />
-            <MenuItem title={'Settings'} to={'settings'} />
-            <MenuItem title={'Sign Out'} />
+            <MenuItem title={'Notifications'} to={'/notifications'} />
+            <MenuItem title={'My Profile'} to={'/profile'} />
+            <MenuItem title={'Settings'} to={'/settings'} />
+            <button
+              className='text-lg font-semibold text-white hover:font-bold hover:text-secondary py-2 px-4'
+              onClick={handleLogout}
+            >
+              Sign Out
+            </button>
           </div>
           <div className='flex border-2 border-white rounded overflow-hidden'>
             <input

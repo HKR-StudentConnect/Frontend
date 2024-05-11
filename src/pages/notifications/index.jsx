@@ -1,7 +1,12 @@
 import React from 'react'
+import PageLayout from '../../layouts/pageLayout'
 
 const Notifications = () => {
-  return <div></div>
+  return (
+    <PageLayout>
+      <div>Notifications</div>
+    </PageLayout>
+  )
 }
 
 export default Notifications

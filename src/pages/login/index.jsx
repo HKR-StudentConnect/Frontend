@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.png'
 import AuthInput from '../../components/auth/authInput'
+import { useDispatch } from 'react-redux'
+import { loginAndSetUser } from '../../store/actions/userActions'
 
 const Login = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -19,23 +23,15 @@ const Login = () => {
     event.preventDefault()
     console.log('Form submitted:', formData)
 
-    const obj = {
-      email: formData.email,
-      password: formData.password,
-    }
-
-    const response = await fetch('http://localhost:5000/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(obj),
-    })
-
-    if (response.ok) {
-      const jsonData = await response.json()
-      console.log(jsonData)
-      navigate('/home', { state: { user: jsonData.user } })
+    try {
+      const result = await dispatch(
+        loginAndSetUser(formData.email, formData.password)
+      )
+      if (result.success) {
+        navigate('/')
+      }
+    } catch (err) {
+      console.error('Login failed:', err)
     }
   }
 
@@ -50,7 +46,7 @@ const Login = () => {
         </div>
 
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-          <form className='space-y-6' action='#' method='POST'>
+          <form className='space-y-6' onSubmit={submit}>
             <AuthInput
               label={'Email address'}
               value={formData.email}
@@ -82,6 +78,7 @@ const Login = () => {
                   name='password'
                   type='password'
                   autoComplete='current-password'
+                  onChange={handleChange}
                   required
                   className='block w-full rounded-lg border-0 py-3 text-black placeholder:text-gray focus:ring-2 focus:ring-inset focus:ring-white sm:text-sm sm:leading-6'
                 />
@@ -91,7 +88,6 @@ const Login = () => {
             <div>
               <button
                 type='submit'
-                onSubmit={submit}
                 className='flex w-full justify-center rounded-lg bg-secondary px-3 py-3 text-md font-semibold leading-6 text-black'
               >
                 Sign in

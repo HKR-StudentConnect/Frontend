@@ -5,7 +5,7 @@ const MenuItem = ({ title, to }) => {
   return (
     <Link
       to={to}
-      className='text-lg font-medium text-white hover:font-bold hover:text-secondary py-2 px-4'
+      className='text-lg font-semibold text-white hover:font-bold hover:text-secondary py-2 px-4'
     >
       {title}
     </Link>
