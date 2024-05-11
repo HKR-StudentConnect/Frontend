@@ -13,5 +13,5 @@ module.exports = {
       gray: 'gray',
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }

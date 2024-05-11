@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import signupimage from '../../assets/signupimage.jpeg'
+import logo from '../../assets/logo.png'
+import AuthInput from '../../components/auth/authInput'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -54,116 +55,74 @@ const Register = () => {
   }
 
   return (
-    <div className='signuppage-bg min-h-screen flex flex-col justify-center items-center bg-gren-400'>
-      <h2 className='text-3xl font-semibold mb-4'>Sign Up</h2>
-      <div className='flex flex-col items-center'>
-        <img
-          src={signupimage}
-          alt='Sign Up Img'
-          className='h-64 w-128 object-cover rounded-full mb-8'
-        />
-        <form onSubmit={submit} className='w-full max-w-md'>
-          <div className='mb-4'>
-            <label htmlFor='name' className='block text-gray-700'>
-              Name
-            </label>
-            <input
+    <>
+      <div className='bg-primary flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
+        <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
+          <img className='mx-auto h-20 w-auto' src={logo} alt='Your Company' />
+          <h2 className='mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-white'>
+            Create your account
+          </h2>
+        </div>
+
+        <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-sm'>
+          <form className='space-y-6' action='#' method='POST'>
+            <AuthInput
+              label={'Name'}
+              value={data.name}
+              onChangeText={handleChange}
               type='text'
               id='name'
               name='name'
-              value={data.name}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
+              required
             />
-          </div>
-          {/* <div className='mb-4'>
-            <label htmlFor='age' className='block text-gray-700'>
-              Age
-            </label>
-            <input
-              type='text'
-              id='age'
-              name='age'
-              value={data.age}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
-            />
-          </div> */}
-          <div className='mb-4'>
-            <label htmlFor='username' className='block text-gray-700'>
-              Username
-            </label>
-            <input
+
+            <AuthInput
+              label={'Username'}
+              value={data.username}
+              onChangeText={handleChange}
               type='text'
               id='username'
               name='username'
-              value={data.username}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
+              required
             />
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='email' className='block text-gray-700'>
-              Email
-            </label>
-            <input
-              type='email'
+
+            <AuthInput
+              label={'Email'}
+              value={data.email}
+              onChangeText={handleChange}
               id='email'
               name='email'
-              value={data.email}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
+              type='email'
+              required
             />
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='phone' className='block text-gray-700'>
-              Phone number
-            </label>
-            <input
-              type='text'
+
+            <AuthInput
+              label={'Phone number'}
+              value={data.phone}
+              onChangeText={handleChange}
               id='phone'
               name='phone'
-              value={data.phone}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
+              type='tel'
+              required
             />
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='password' className='block text-gray-700'>
-              Password
-            </label>
-            <input
-              type='password'
+
+            <AuthInput
+              label={'Password'}
+              value={data.password}
+              onChangeText={handleChange}
               id='password'
               name='password'
-              value={data.password}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
-            />
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='confirmPassword' className='block text-gray-700'>
-              Confirm Password
-            </label>
-            <input
               type='password'
-              id='confirmPassword'
-              name='confirmPassword'
-              value={data.confirmPassword}
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
+              autoComplete='current-password'
+              required
             />
-          </div>
-          <div className='mb-4'>
-            <label htmlFor='profilePicture' className='block text-gray-700'>
-              Profile Picture
-            </label>
-            <input
+
+            {/* <AuthInput
+              label={'Profile Picture'}
+              onChangeText={handleChange}
               type='file'
               id='profilePicture'
               name='profilePicture'
-              onChange={handleChange}
-              className='form-input mt-1 block w-full'
             />
             {data.profilePicture && (
               <img
@@ -171,23 +130,31 @@ const Register = () => {
                 alt='Profile'
                 className='mt-2 h-20 w-20 object-cover rounded-full'
               />
-            )}
-          </div>
-          <button
-            type='submit'
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-          >
-            Sign Up
-          </button>
-        </form>
-        <p className='mt-4'>
-          Already have an account?
-          <Link to='/signin' className='text-blue-500'>
-            Log in
-          </Link>
-        </p>
+            )} */}
+
+            <div>
+              <button
+                type='submit'
+                onSubmit={submit}
+                className='flex w-full justify-center rounded-lg bg-secondary px-3 py-3 text-md font-semibold leading-6 text-black'
+              >
+                Sign up
+              </button>
+            </div>
+          </form>
+
+          <p className='mt-10 text-center text-md text-white'>
+            Already have an account?
+            <Link
+              to='/login'
+              className='font-semibold ml-1 leading-6 text-secondary'
+            >
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
