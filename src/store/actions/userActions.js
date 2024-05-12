@@ -1,7 +1,8 @@
 import { loginUser, registerUser } from '../../api/auth'
+import { createPost } from '../../api/post'
 import { resetUser } from '../../api/storage'
 import { getUserInfo } from '../../api/user'
-import { setUser, logoutUser } from '../slices/userSlice'
+import { setUser, logoutUser, addPost } from '../slices/userSlice'
 
 export const registerAndSetUser = data => async dispatch => {
   try {
@@ -32,6 +33,16 @@ export const userLogout = () => async dispatch => {
   try {
     dispatch(logoutUser())
     resetUser()
+    return { success: true }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const createAndAddPost = (text, imageUrl) => async dispatch => {
+  try {
+    const post = await createPost(text, imageUrl)
+    dispatch(addPost(post))
     return { success: true }
   } catch (error) {
     console.error(error)

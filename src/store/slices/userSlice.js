@@ -14,8 +14,11 @@ const userSlice = createSlice({
     logoutUser: state => {
       state.currentUser = null
     },
+    addPost: (state, action) => {
+      state.currentUser.posts.push(action.payload)
+    },
   },
 })
 
-export const { setUser, logoutUser } = userSlice.actions
+export const { setUser, logoutUser, addPost } = userSlice.actions
 export default userSlice.reducer

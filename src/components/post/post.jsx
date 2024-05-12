@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { FaRegHeart } from 'react-icons/fa'
+import { FaHeart } from 'react-icons/fa'
+import { FaCommentAlt } from 'react-icons/fa'
 
 const Post = ({ username, userAvatar, timestamp, content, imageUrl }) => {
   const [showComments, setShowComments] = useState(false)
@@ -43,15 +46,19 @@ const Post = ({ username, userAvatar, timestamp, content, imageUrl }) => {
       />
       <div className='flex items-center text-gray-600 mb-4'>
         <span className='flex items-center mr-4 cursor-pointer'>
-          <i className='mr-1'>👍 Like</i>
+          <FaRegHeart className='text-primary mr-2 text-xl' />
+          {/* <FaHeart className='text-secondary mr-2 text-xl' /> */}
+          <span>Like</span>
         </span>
         <span
           className='flex items-center cursor-pointer'
           onClick={toggleComments}
         >
-          <i className='mr-1'>💬 Comment</i>
+          <FaCommentAlt className='text-primary mr-2 text-lg' />
+          <span>Comment</span>
         </span>
       </div>
+
       {/* Comment Section */}
       {showComments && (
         <div className='mt-4'>
