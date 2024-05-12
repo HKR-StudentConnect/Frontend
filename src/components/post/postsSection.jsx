@@ -4,7 +4,7 @@ import Post from './post'
 import CreatePostButton from './createPostButton'
 import CreatePostModal from './createPostModal'
 
-const PostsSection = () => {
+const PostsSection = ({ user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => setIsModalOpen(true)
@@ -12,7 +12,7 @@ const PostsSection = () => {
 
   return (
     <div className='w-full'>
-      <CreatePostButton onClick={openModal} />
+      <CreatePostButton user={user} onClick={openModal} />
       <CreatePostModal show={isModalOpen} onClose={closeModal} />
 
       <div>

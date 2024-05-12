@@ -1,4 +1,3 @@
-// src/components/CreatePostModal.js
 import React, { useState } from 'react'
 
 const CreatePostModal = ({ show, onClose }) => {
