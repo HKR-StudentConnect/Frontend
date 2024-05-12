@@ -14,8 +14,22 @@ const userSlice = createSlice({
     logoutUser: state => {
       state.currentUser = null
     },
+    addPost: (state, action) => {
+      state.currentUser.posts.push(action.payload)
+    },
+    addFollowee: (state, action) => {
+      state.currentUser.follows.push(action.payload)
+    },
+    removeFollowee: (state, action) => {
+      const followeeId = action.payload
+      state.currentUser.follows = state.currentUser.follows.filter(
+        followee => followee._id !== followeeId
+      )
+      console.log(state.currentUser.follows.length)
+    },
   },
 })
 
-export const { setUser, logoutUser } = userSlice.actions
+export const { setUser, logoutUser, addPost, addFollowee, removeFollowee } =
+  userSlice.actions
 export default userSlice.reducer

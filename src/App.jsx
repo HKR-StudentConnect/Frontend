@@ -7,6 +7,7 @@ import Notifications from './pages/notifications/index.jsx'
 import Profile from './pages/profile/index.jsx'
 import Settings from './pages/settings/index.jsx'
 import RequireAuth from '../src/components/requireAuth.jsx'
+import Search from './pages/search/index.js'
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
           element={
             <RequireAuth>
               <Settings />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/search/:query'
+          element={
+            <RequireAuth>
+              <Search />
             </RequireAuth>
           }
         />
