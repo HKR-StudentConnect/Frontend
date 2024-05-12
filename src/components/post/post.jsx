@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FaRegHeart } from 'react-icons/fa'
-import { FaHeart } from 'react-icons/fa'
+// import { FaHeart } from 'react-icons/fa'
 import { FaCommentAlt } from 'react-icons/fa'
 
 const Post = ({ username, userAvatar, timestamp, content, imageUrl }) => {
