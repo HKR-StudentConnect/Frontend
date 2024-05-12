@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MenuItem from './menuItem'
 import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
@@ -6,12 +6,25 @@ import { useDispatch } from 'react-redux'
 import { userLogout } from '../../store/actions/userActions'
 
 const Navbar = () => {
+  const [search, setSearch] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleLogout = () => {
     dispatch(userLogout())
     navigate('/welcome')
+  }
+
+  const handleSearch = () => {
+    if (search.trim()) {
+      navigate(`/search/${search}`)
+    }
+  }
+
+  const handleKeyUp = e => {
+    if (e.key === 'Enter' && search.trim()) {
+      handleSearch()
+    }
   }
 
   return (
@@ -36,15 +49,14 @@ const Navbar = () => {
           <div className='flex border-2 border-white rounded overflow-hidden'>
             <input
               type='text'
-              placeholder='Search...'
+              placeholder='Search a user...'
               className='px-4 py-2 w-80 text-black border-none'
-              onKeyUp={e => {
-                if (e.key === 'Enter') console.log(e.target.value)
-              }}
+              onKeyUp={handleKeyUp}
+              onChange={e => setSearch(e.target.value)}
             />
             <button
               className='bg-secondary hover:bg-background px-4'
-              onClick={() => console.log('Search initiated')}
+              onClick={handleSearch}
             >
               <svg
                 className='w-5 h-5 text-black'

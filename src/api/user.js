@@ -57,3 +57,14 @@ export const unfollowUser = async (userId, followeeId) => {
     console.error('Error unfollowing user:', error.response.data)
   }
 }
+
+export const getUsersByUsername = async query => {
+  try {
+    const response = await baseInstance.get(
+      `${userSuffix}/search/user?username=${query}`
+    )
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
