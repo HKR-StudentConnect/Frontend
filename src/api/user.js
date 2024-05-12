@@ -3,7 +3,7 @@ import { resetUser } from './storage'
 
 const userSuffix = '/users'
 
-export const getFullUserInfoByID = async userId => {
+export const getUserInfo = async userId => {
   try {
     const response = await baseInstance.get(`${userSuffix}/${userId}`)
     return response.data

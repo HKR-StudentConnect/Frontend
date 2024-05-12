@@ -1,6 +1,6 @@
 import { loginUser, registerUser } from '../../api/auth'
 import { resetUser } from '../../api/storage'
-import { getFullUserInfoByID } from '../../api/user'
+import { getUserInfo } from '../../api/user'
 import { setUser, logoutUser } from '../slices/userSlice'
 
 export const registerAndSetUser = data => async dispatch => {
@@ -8,7 +8,7 @@ export const registerAndSetUser = data => async dispatch => {
     const result = await registerUser(data)
     if (result === 201) {
       const userId = await loginUser(data.email, data.password)
-      const user = await getFullUserInfoByID(userId)
+      const user = await getUserInfo(userId)
       dispatch(setUser(user))
       return { success: true }
     }
@@ -20,7 +20,7 @@ export const registerAndSetUser = data => async dispatch => {
 export const loginAndSetUser = (email, password) => async dispatch => {
   try {
     const userId = await loginUser(email, password)
-    const user = await getFullUserInfoByID(userId)
+    const user = await getUserInfo(userId)
     dispatch(setUser(user))
     return { success: true }
   } catch (error) {
