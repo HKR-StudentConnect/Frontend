@@ -34,11 +34,7 @@ const Search = () => {
         </div>
         <div className='w-1/2 m-auto flex flex-col space-y-2'>
           {users.map(user => (
-            <UserCard
-              name={user.profile.name}
-              username={user.username}
-              avatar={user.profile.profilePictureUrl}
-            />
+            <UserCard user={user} />
           ))}
         </div>
       </div>
