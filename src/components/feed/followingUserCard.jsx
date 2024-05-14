@@ -32,7 +32,7 @@ const FollowingUserCard = ({ user }) => {
             'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Ffacebook-no-profile-picture-icon-19.jpg&f=1&nofb=1&ipt=8dc5b2976198cd8c00599f0320446330ab55c8d578cd7b27a7831a2cb604a13a&ipo=images'
           }
           alt={user.profile.name}
-          className='rounded-full h-12 mr-4'
+          className='rounded-full w-12 h-12 mr-4'
         />
         <div>
           <p className='font-semibold text-md'>{user.profile.name}</p>

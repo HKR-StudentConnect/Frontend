@@ -15,3 +15,55 @@ export const createPost = async (text, imageUrl) => {
     console.error('Error creating post:', error.response.data)
   }
 }
+
+export const likePost = async (postId, userId) => {
+  try {
+    const response = await baseInstance.post(`${postSuffix}/${postId}/like`, {
+      userId: userId,
+    })
+    const updatedPost = response.data
+    return updatedPost
+  } catch (error) {
+    console.error('Error liking post:', error.response.data)
+  }
+}
+
+export const unlikePost = async (postId, userId) => {
+  try {
+    const response = await baseInstance.post(`${postSuffix}/${postId}/unlike`, {
+      userId: userId,
+    })
+    const updatedPost = response.data
+    return updatedPost
+  } catch (error) {
+    console.error('Error unliking post:', error.response.data)
+  }
+}
+
+export const createComment = async (postId, userId, text) => {
+  try {
+    const response = await baseInstance.post(
+      `${postSuffix}/${postId}/comments`,
+      {
+        userId: userId,
+        text: text,
+      }
+    )
+    const updatedPost = response.data
+    return updatedPost
+  } catch (error) {
+    console.error('Error creating comment:', error.response.data)
+  }
+}
+
+export const deleteComment = async (postId, commentId) => {
+  try {
+    const response = await baseInstance.delete(
+      `${postSuffix}/${postId}/comments/${commentId}`
+    )
+    const updatedPost = response.data
+    return updatedPost
+  } catch (error) {
+    console.error('Error deleting comment:', error.response.data)
+  }
+}

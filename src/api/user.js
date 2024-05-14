@@ -65,3 +65,14 @@ export const getUsersByUsername = async query => {
     console.error(error)
   }
 }
+
+export const getUserFollowsPosts = async userId => {
+  try {
+    const response = await baseInstance.get(
+      `${userSuffix}/${userId}/follows/posts`
+    )
+    return response.data
+  } catch (error) {
+    console.error('Error fetching followers:', error.response.data)
+  }
+}
