@@ -1,13 +1,19 @@
 import { loginUser, registerUser } from '../../api/auth'
 import { createPost } from '../../api/post'
 import { resetUser } from '../../api/storage'
-import { followUser, getUserInfo, unfollowUser } from '../../api/user'
+import {
+  followUser,
+  getUserFollowsPosts,
+  getUserInfo,
+  unfollowUser,
+} from '../../api/user'
 import {
   setUser,
   logoutUser,
   addPost,
   addFollowee,
   removeFollowee,
+  fetchFollowsPosts,
 } from '../slices/userSlice'
 
 export const registerAndSetUser = data => async dispatch => {
@@ -70,6 +76,15 @@ export const unfollowAUser = (userId, followeeId) => async dispatch => {
     const unfollowedUserId = await unfollowUser(userId, followeeId)
     dispatch(removeFollowee(unfollowedUserId.followeeId))
     return { success: true }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getFollowsPosts = userId => async dispatch => {
+  try {
+    const posts = await getUserFollowsPosts(userId)
+    dispatch(fetchFollowsPosts(posts))
   } catch (error) {
     console.error(error)
   }

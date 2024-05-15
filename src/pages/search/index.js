@@ -16,7 +16,7 @@ const Search = () => {
     getUsers()
   }, [query, users])
 
-  if (users.length === 0) {
+  if (!users || users.length === 0) {
     return (
       <PageLayout>
         <div className='h-screen p-12 text-center'>
