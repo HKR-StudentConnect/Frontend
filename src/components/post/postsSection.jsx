@@ -27,14 +27,7 @@ const PostsSection = ({ user }) => {
       <CreatePostModal show={isModalOpen} onClose={closeModal} />
       <div>
         {followsPosts.map(post => (
-          <Post
-            key={post._id}
-            username={post.author.username}
-            userAvatar={post.author.profile.profilePictureUrl}
-            timestamp='June 21, 12:45 pm'
-            content={post.content.text}
-            imageUrl={post.content.imageUrl}
-          />
+          <Post key={post._id} post={post} currentUser={user} />
         ))}
       </div>
     </div>

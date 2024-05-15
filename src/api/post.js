@@ -21,8 +21,7 @@ export const likePost = async (postId, userId) => {
     const response = await baseInstance.post(`${postSuffix}/${postId}/like`, {
       userId: userId,
     })
-    const updatedPost = response.data
-    return updatedPost
+    return response
   } catch (error) {
     console.error('Error liking post:', error.response.data)
   }
@@ -33,8 +32,7 @@ export const unlikePost = async (postId, userId) => {
     const response = await baseInstance.post(`${postSuffix}/${postId}/unlike`, {
       userId: userId,
     })
-    const updatedPost = response.data
-    return updatedPost
+    return response
   } catch (error) {
     console.error('Error unliking post:', error.response.data)
   }

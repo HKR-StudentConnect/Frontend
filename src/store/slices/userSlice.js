@@ -26,7 +26,6 @@ const userSlice = createSlice({
       state.currentUser.follows = state.currentUser.follows.filter(
         followee => followee._id !== followeeId
       )
-      console.log(state.currentUser.follows.length)
     },
     fetchFollowsPosts: (state, action) => {
       state.followsPosts = action.payload

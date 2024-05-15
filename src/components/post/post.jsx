@@ -2,14 +2,32 @@ import React, { useState } from 'react'
 import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa'
 import { FaCommentAlt } from 'react-icons/fa'
+import { likePost, unlikePost } from '../../api/post'
 
-const Post = ({ username, userAvatar, timestamp, content, imageUrl }) => {
+const Post = ({ post, currentUser }) => {
   const [showComments, setShowComments] = useState(false)
   const [newComment, setNewComment] = useState('')
   const [comments, setComments] = useState([
     { id: 1, text: 'Great post!', author: 'John Doe' },
     { id: 2, text: 'Thanks for sharing!', author: 'Jane Doe' },
   ])
+  const [likeStatus, setLikeStatus] = useState(
+    post.likes.filter(like => like.user._id === currentUser._id).length > 0
+  )
+
+  const toggleLike = async () => {
+    if (!likeStatus) {
+      const response = await likePost(post._id, currentUser._id)
+      if (response.status === 200) {
+        setLikeStatus(true)
+      }
+    } else {
+      const response = await unlikePost(post._id, currentUser._id)
+      if (response.status === 200) {
+        setLikeStatus(false)
+      }
+    }
+  }
 
   const toggleComments = () => {
     setShowComments(!showComments)
@@ -29,34 +47,40 @@ const Post = ({ username, userAvatar, timestamp, content, imageUrl }) => {
     <div className='bg-white p-6 rounded-xl mb-4'>
       <div className='flex items-center mb-2'>
         <img
-          src={userAvatar}
-          alt={username}
+          src={post.author.profile.profilePictureUrl}
+          alt={post.author.username}
           className='rounded-full w-8 h-8 mr-2'
         />
         <div>
-          <p className='font-semibold'>{username}</p>
-          <p className='text-xs text-gray-500'>{timestamp}</p>
+          <p className='font-semibold'>{post.author.username}</p>
+          <p className='text-xs text-gray-500'>{'June 21, 12:45 pm'}</p>
         </div>
       </div>
-      <p className='mb-4'>{content}</p>
+      <p className='mb-4'>{post.content.text}</p>
       <img
-        src={imageUrl}
+        src={post.content.imageUrl}
         alt='PostImage'
         className='w-full h-auto rounded-lg mb-4'
       />
       <div className='flex items-center text-gray-600 mb-4'>
-        <span className='flex items-center mr-4 cursor-pointer'>
-          <FaRegHeart className='text-primary mr-2 text-xl' />
-          {/* <FaHeart className='text-secondary mr-2 text-xl' /> */}
+        <button
+          onClick={toggleLike}
+          className='flex items-center mr-4 cursor-pointer'
+        >
+          {likeStatus ? (
+            <FaHeart className='text-primary mr-2 text-xl' />
+          ) : (
+            <FaRegHeart className='text-gray mr-2 text-xl' />
+          )}
           <span>Like</span>
-        </span>
-        <span
+        </button>
+        <button
           className='flex items-center cursor-pointer'
           onClick={toggleComments}
         >
-          <FaCommentAlt className='text-primary mr-2 text-lg' />
+          <FaCommentAlt className='text-gray mr-2 text-lg' />
           <span>Comment</span>
-        </span>
+        </button>
       </div>
 
       {/* Comment Section */}
