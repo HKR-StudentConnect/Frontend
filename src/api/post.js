@@ -47,8 +47,7 @@ export const createComment = async (postId, userId, text) => {
         text: text,
       }
     )
-    const updatedPost = response.data
-    return updatedPost
+    return response
   } catch (error) {
     console.error('Error creating comment:', error.response.data)
   }
@@ -59,8 +58,7 @@ export const deleteComment = async (postId, commentId) => {
     const response = await baseInstance.delete(
       `${postSuffix}/${postId}/comments/${commentId}`
     )
-    const updatedPost = response.data
-    return updatedPost
+    return response
   } catch (error) {
     console.error('Error deleting comment:', error.response.data)
   }
