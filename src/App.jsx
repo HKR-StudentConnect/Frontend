@@ -8,6 +8,7 @@ import Profile from './pages/profile/index.jsx'
 import Settings from './pages/settings/index.jsx'
 import RequireAuth from '../src/components/requireAuth.jsx'
 import Search from './pages/search/index.js'
+import Admin from './pages/admin/index.js'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/welcome' element={<Welcome />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/admin' element={<Admin />} />
         <Route
           path='/'
           element={
