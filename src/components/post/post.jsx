@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import { FaRegHeart } from 'react-icons/fa'
-// import { FaHeart } from 'react-icons/fa'
+import { FaHeart } from 'react-icons/fa'
 import { FaCommentAlt } from 'react-icons/fa'
-import { likePost, unlikePost } from '../../api/post'
+import {
+  createComment,
+  deleteComment,
+  likePost,
+  unlikePost,
+} from '../../api/post'
+import CommentCard from './commentCard'
 
 const Post = ({ post, currentUser }) => {
   const [showComments, setShowComments] = useState(false)
   const [newComment, setNewComment] = useState('')
-  const [comments, setComments] = useState([
-    { id: 1, text: 'Great post!', author: 'John Doe' },
-    { id: 2, text: 'Thanks for sharing!', author: 'Jane Doe' },
-  ])
+  const [comments, setComments] = useState(post.comments)
   const [likeStatus, setLikeStatus] = useState(
     post.likes.filter(like => like.user._id === currentUser._id).length > 0
   )
@@ -33,13 +36,34 @@ const Post = ({ post, currentUser }) => {
     setShowComments(!showComments)
   }
 
-  const addComment = () => {
+  const onDeleteComment = async commentId => {
+    console.log(commentId)
+    const response = await deleteComment(post._id, commentId)
+    if (response.status === 200) {
+      setComments(comments.filter(cmt => cmt._id !== commentId))
+    }
+  }
+
+  const addComment = async () => {
     if (newComment.trim()) {
-      setComments([
-        ...comments,
-        { id: comments.length + 1, text: newComment, author: 'You' },
-      ])
-      setNewComment('')
+      const response = await createComment(
+        post._id,
+        currentUser._id,
+        newComment
+      )
+      if (response.status === 200) {
+        console.log(response.data.commentId)
+        setComments([
+          ...comments,
+          {
+            _id: response.data.commentId,
+            user: currentUser,
+            text: newComment,
+            timestamp: new Date(),
+          },
+        ])
+        setNewComment('')
+      }
     }
   }
 
@@ -86,15 +110,15 @@ const Post = ({ post, currentUser }) => {
       {/* Comment Section */}
       {showComments && (
         <div className='mt-4'>
-          {/* Comments List */}
           <div className='mb-4'>
             {comments.map(comment => (
-              <div key={comment.id} className='flex items-center mb-2'>
-                <span className='text-sm font-semibold mr-2'>
-                  {comment.author}:
-                </span>
-                <span>{comment.text}</span>
-              </div>
+              <CommentCard
+                key={comment._id}
+                username={comment.user.username}
+                text={comment.text}
+                canDelete={comment.user._id === currentUser._id}
+                onClick={() => onDeleteComment(comment._id)}
+              />
             ))}
           </div>
 
@@ -104,7 +128,7 @@ const Post = ({ post, currentUser }) => {
               placeholder='Write a comment...'
               value={newComment}
               onChange={e => setNewComment(e.target.value)}
-              className='text-black bg-transparent flex-1 outline-none border-none text-md'
+              className='text-black bg-transparent flex-1 focus:ring-0 outline-none border-none focus:border-primary text-md'
             />
             <button onClick={addComment} className='mr-2'>
               <svg
