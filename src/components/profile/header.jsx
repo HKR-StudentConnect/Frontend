@@ -1,13 +1,14 @@
 import React from 'react'
+import ProfilePicture from '../user/profilePicture'
 
 const Header = ({ user }) => {
   return (
     <div className='bg-background2 p-12 rounded-2xl'>
       <div className='flex items-center space-x-24 text-black'>
-        <img
-          src={user.profile.profilePictureUrl}
-          alt='Profile'
-          className='rounded-full w-36 h-36'
+        <ProfilePicture
+          imageUrl={user.profile.profilePictureUrl}
+          width={36}
+          height={36}
         />
         <div className='w-1/2'>
           <h1 className='text-2xl font-bold'>{user.username}</h1>

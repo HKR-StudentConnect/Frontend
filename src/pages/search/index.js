@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import { useParams } from 'react-router-dom'
-import UserCard from '../../components/user/userCard'
+import UserCard from '../../components/user/userCardLg'
 import { getUsersByUsername } from '../../api/user'
 
 const Search = () => {

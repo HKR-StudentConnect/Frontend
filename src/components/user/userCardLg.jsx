@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { followAUser, unfollowAUser } from '../../store/actions/userActions'
+import ProfilePicture from './profilePicture'
 
-const FollowingUserCard = ({ user }) => {
+const UserCardLg = ({ user }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.user.currentUser)
   const [followStatus, setFollowStatus] = useState(
@@ -24,24 +25,21 @@ const FollowingUserCard = ({ user }) => {
   }
 
   return (
-    <div className='bg-white flex items-center justify-between px-4 py-2 rounded-xl mb-2 border border-primary border-opacity-30'>
+    <div className='bg-white flex items-center justify-between p-6 rounded-xl mb-2 border border-primary border-opacity-30'>
       <div className='flex items-center'>
-        <img
-          src={
-            user.profile.profilePictureUrl ??
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Ffacebook-no-profile-picture-icon-19.jpg&f=1&nofb=1&ipt=8dc5b2976198cd8c00599f0320446330ab55c8d578cd7b27a7831a2cb604a13a&ipo=images'
-          }
-          alt={user.profile.name}
-          className='rounded-full w-12 h-12 mr-4'
+        <ProfilePicture
+          imageUrl={user.profile.profilePictureUrl}
+          width={16}
+          height={16}
         />
         <div>
-          <p className='font-semibold text-md'>{user.profile.name}</p>
-          <p className='text-gray text-sm'>@{user.username}</p>
+          <p className='font-semibold text-lg'>{user.profile.name}</p>
+          <p className='text-gray'>@{user.username}</p>
         </div>
       </div>
       <button
         onClick={toggleFollow}
-        className='bg-secondary hover:bg-background font-semibold text-sm p-2 rounded'
+        className='bg-secondary hover:bg-background font-semibold py-2 px-4 rounded'
       >
         {followStatus ? 'Unfollow' : 'Follow'}
       </button>
@@ -49,4 +47,4 @@ const FollowingUserCard = ({ user }) => {
   )
 }
 
-export default FollowingUserCard
+export default UserCardLg

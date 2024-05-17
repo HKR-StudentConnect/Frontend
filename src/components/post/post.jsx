@@ -9,6 +9,7 @@ import {
   unlikePost,
 } from '../../api/post'
 import CommentCard from './commentCard'
+import ProfilePicture from '../user/profilePicture'
 
 const Post = ({ post, currentUser }) => {
   const [showComments, setShowComments] = useState(false)
@@ -69,13 +70,10 @@ const Post = ({ post, currentUser }) => {
   return (
     <div className='bg-white p-6 rounded-xl mb-4'>
       <div className='flex items-center mb-2'>
-        <img
-          src={
-            post.author.profile.profilePictureUrl ??
-            'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Ffacebook-no-profile-picture-icon-19.jpg&f=1&nofb=1&ipt=8dc5b2976198cd8c00599f0320446330ab55c8d578cd7b27a7831a2cb604a13a&ipo=images'
-          }
-          alt={post.author.username}
-          className='rounded-full w-8 h-8 mr-2'
+        <ProfilePicture
+          imageUrl={post.author.profile.profilePictureUrl}
+          width={8}
+          height={8}
         />
         <div>
           <p className='font-semibold'>{post.author.username}</p>

@@ -1,5 +1,5 @@
 import React from 'react'
-import FollowingUserCard from './followingUserCard'
+import UserCardSm from '../user/userCardSm'
 
 const FeedProfile = ({ user }) => {
   return (
@@ -23,7 +23,7 @@ const FeedProfile = ({ user }) => {
           <h3 className='font-bold text-lg mb-2'>Following</h3>
           <ul>
             {user.follows.map(followee => (
-              <FollowingUserCard user={followee} />
+              <UserCardSm user={followee} />
             ))}
           </ul>
         </>
