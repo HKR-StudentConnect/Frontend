@@ -15,6 +15,15 @@ export const getUserInfo = async userId => {
   }
 }
 
+export const getPublicUserInfo = async userId => {
+  try {
+    const response = await baseInstance.get(`${userSuffix}/public/${userId}`)
+    return response.data
+  } catch (error) {
+    console.error('Get public user failed:', error)
+  }
+}
+
 export const getUserFollowers = async userId => {
   try {
     const response = await baseInstance.get(`${userSuffix}/${userId}/followers`)

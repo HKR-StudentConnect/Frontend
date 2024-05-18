@@ -1,25 +1,25 @@
 import React from 'react'
 import ProfilePicture from '../user/profilePicture'
 
-const Header = ({ user }) => {
+const ProfileHeader = ({ user }) => {
   return (
     <div className='bg-background2 p-12 rounded-2xl'>
-      <div className='flex items-center space-x-24 text-black'>
+      <div className='flex items-center space-x-16 text-black'>
         <ProfilePicture
           imageUrl={user.profile.profilePictureUrl}
           width={36}
           height={36}
         />
         <div className='w-1/2'>
-          <h1 className='text-2xl font-bold'>{user.username}</h1>
+          <h1 className='text-xl font-bold'>{user.username}</h1>
           <div className='flex space-x-16 my-4'>
-            <div className='text-xl'>
+            <div className='text-lg'>
               <strong>{user.posts.length}</strong> posts
             </div>
-            <div className='text-xl'>
+            <div className='text-lg'>
               <strong>{user.followers.length}</strong> followers
             </div>
-            <div className='text-xl'>
+            <div className='text-lg'>
               <strong>{user.follows.length}</strong> following
             </div>
           </div>
@@ -32,4 +32,4 @@ const Header = ({ user }) => {
   )
 }
 
-export default Header
+export default ProfileHeader

@@ -22,9 +22,10 @@ const FeedProfile = ({ user }) => {
         <>
           <h3 className='font-bold text-lg mb-2'>Following</h3>
           <ul>
-            {user.follows.map(followee => (
+            {/* TODO: FETCH user follows */}
+            {/* {user.follows.map(followee => (
               <UserCardSm user={followee} />
-            ))}
+            ))} */}
           </ul>
         </>
       ) : null}

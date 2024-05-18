@@ -1,19 +1,13 @@
 import { loginUser, registerUser } from '../../api/auth'
 import { createPost } from '../../api/post'
 import { resetUser } from '../../api/storage'
-import {
-  followUser,
-  getUserFollowsPosts,
-  getUserInfo,
-  unfollowUser,
-} from '../../api/user'
+import { followUser, getUserInfo, unfollowUser } from '../../api/user'
 import {
   setUser,
   logoutUser,
   addPost,
   addFollowee,
   removeFollowee,
-  fetchFollowsPosts,
 } from '../slices/userSlice'
 
 export const registerAndSetUser = data => async dispatch => {
@@ -51,15 +45,17 @@ export const userLogout = () => async dispatch => {
   }
 }
 
-export const createAndAddPost = (text, imageUrl) => async dispatch => {
-  try {
-    const post = await createPost(text, imageUrl)
-    dispatch(addPost(post))
-    return { success: true }
-  } catch (error) {
-    console.error(error)
+export const createAndAddPost =
+  (text, imageUrl, currentUser) => async dispatch => {
+    try {
+      const post = await createPost(text, imageUrl)
+      post.author = currentUser
+      dispatch(addPost(post))
+      return { success: true }
+    } catch (error) {
+      console.error(error)
+    }
   }
-}
 
 export const followAUser = (userId, followeeId) => async dispatch => {
   try {
@@ -76,15 +72,6 @@ export const unfollowAUser = (userId, followeeId) => async dispatch => {
     const unfollowedUserId = await unfollowUser(userId, followeeId)
     dispatch(removeFollowee(unfollowedUserId.followeeId))
     return { success: true }
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-export const getFollowsPosts = userId => async dispatch => {
-  try {
-    const posts = await getUserFollowsPosts(userId)
-    dispatch(fetchFollowsPosts(posts))
   } catch (error) {
     console.error(error)
   }

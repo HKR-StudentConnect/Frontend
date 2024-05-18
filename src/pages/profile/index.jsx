@@ -1,7 +1,7 @@
 import React from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import { useSelector } from 'react-redux'
-import Header from '../../components/profile/header'
+import ProfileHeader from '../../components/profile/profileHeader'
 import PostsGrid from '../../components/profile/postsGrid'
 
 const Profile = () => {
@@ -9,9 +9,9 @@ const Profile = () => {
 
   return (
     <PageLayout>
-      <div className='max-w-6xl mx-auto mt-8 p-4 rounded-2xl'>
-        <Header user={currentUser} />
-        <PostsGrid posts={currentUser.posts} />
+      <div className='max-w-4xl mx-auto mt-8 p-4 rounded-2xl'>
+        <ProfileHeader user={currentUser} />
+        <PostsGrid user={currentUser} />
       </div>
     </PageLayout>
   )

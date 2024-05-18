@@ -2,6 +2,15 @@ import baseInstance from './api'
 
 const postSuffix = '/posts'
 
+export const getPosts = async userId => {
+  try {
+    const response = await baseInstance.get(`${postSuffix}/user/${userId}`)
+    return response.data
+  } catch (error) {
+    console.error('Error fetching user posts:', error.response.data)
+  }
+}
+
 export const createPost = async (text, imageUrl) => {
   try {
     const response = await baseInstance.post(`${postSuffix}`, {

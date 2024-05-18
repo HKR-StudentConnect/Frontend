@@ -16,29 +16,19 @@ const userSlice = createSlice({
       state.currentUser = null
     },
     addPost: (state, action) => {
-      state.currentUser.posts.push(action.payload)
+      state.currentUser.posts.unshift(action.payload)
     },
     addFollowee: (state, action) => {
       state.currentUser.follows.push(action.payload)
     },
     removeFollowee: (state, action) => {
-      const followeeId = action.payload
       state.currentUser.follows = state.currentUser.follows.filter(
-        followee => followee._id !== followeeId
+        followee => followee._id !== action.payload
       )
-    },
-    fetchFollowsPosts: (state, action) => {
-      state.followsPosts = action.payload
     },
   },
 })
 
-export const {
-  setUser,
-  logoutUser,
-  addPost,
-  addFollowee,
-  removeFollowee,
-  fetchFollowsPosts,
-} = userSlice.actions
+export const { setUser, logoutUser, addPost, addFollowee, removeFollowee } =
+  userSlice.actions
 export default userSlice.reducer

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { createAndAddPost } from '../../store/actions/userActions'
 
-const CreatePostModal = ({ show, onClose }) => {
+const CreatePostModal = ({ show, onClose, user }) => {
   const dispatch = useDispatch()
   const [content, setContent] = useState('')
   const [imageUrl, setImageUrl] = useState('')
@@ -13,10 +13,7 @@ const CreatePostModal = ({ show, onClose }) => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    // Here you would handle posting the new content to your backend or state
-    console.log('Content:', content)
-    console.log('Image URL:', imageUrl)
-    const result = await dispatch(createAndAddPost(content, imageUrl))
+    const result = await dispatch(createAndAddPost(content, imageUrl, user))
     if (result.success) {
       onClose()
     }

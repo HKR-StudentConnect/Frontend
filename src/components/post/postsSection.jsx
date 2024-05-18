@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Post from './post'
 import CreatePostButton from './createPostButton'
 import CreatePostModal from './createPostModal'
 import { useSelector, useDispatch } from 'react-redux'
-import { getFollowsPosts } from '../../store/actions/userActions'
+import { getFollowsPosts } from '../../store/actions/followsPostAction'
+import FollowsPost from './followsPost'
 
 const PostsSection = ({ user }) => {
   const dispatch = useDispatch()
-  const followsPosts = useSelector(state => state.user.followsPosts)
+  const followsPosts = useSelector(state => state.followsPost.data)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => setIsModalOpen(true)
@@ -24,10 +24,10 @@ const PostsSection = ({ user }) => {
   return (
     <div className='w-full'>
       <CreatePostButton user={user} onClick={openModal} />
-      <CreatePostModal show={isModalOpen} onClose={closeModal} />
+      <CreatePostModal show={isModalOpen} onClose={closeModal} user={user} />
       <div>
         {followsPosts.map(post => (
-          <Post key={post._id} post={post} currentUser={user} />
+          <FollowsPost key={post._id} post={post} currentUser={user} />
         ))}
       </div>
     </div>
