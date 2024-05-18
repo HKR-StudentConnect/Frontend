@@ -6,11 +6,11 @@ const ProfileHeader = ({ user }) => {
   const navigate = useNavigate()
 
   const navigateToFollowers = () => {
-    navigate('/followers')
+    navigate(`/profile/${user._id}/followers`)
   }
 
   const navigateToFollows = () => {
-    navigate('/follows')
+    navigate(`/profile/${user._id}/follows`)
   }
 
   return (

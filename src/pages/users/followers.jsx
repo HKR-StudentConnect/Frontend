@@ -1,26 +1,43 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import UsersList from '../../components/profile/usersList'
 import { useSelector } from 'react-redux'
 import { getPublicUserInfo } from '../../api/user'
+import { useParams } from 'react-router-dom'
 
 const Followers = () => {
+  const { userId } = useParams()
   const currentUser = useSelector(state => state.user.currentUser)
   const [followers, setFollowers] = useState([])
 
+  const fetchFollowers = useCallback(async userIds => {
+    const users = await Promise.all(
+      userIds.map(async followerId => {
+        const data = await getPublicUserInfo(followerId)
+        return data
+      })
+    )
+    setFollowers(users)
+  }, [])
+
   useEffect(() => {
-    const fetchFollows = async () => {
-      const users = await Promise.all(
-        currentUser.followers.map(async followerId => {
-          const data = await getPublicUserInfo(followerId)
-          return { ...data, _id: followerId }
-        })
-      )
-      setFollowers(users)
+    const loadFollows = async () => {
+      if (userId === currentUser._id) {
+        await fetchFollowers(currentUser.followers)
+      } else {
+        const user = await getPublicUserInfo(userId)
+        await fetchFollowers(user.followers)
+      }
     }
 
-    fetchFollows()
-  }, [currentUser.followers, currentUser.follows])
+    loadFollows()
+  }, [
+    currentUser._id,
+    currentUser.followers,
+    currentUser.follows,
+    fetchFollowers,
+    userId,
+  ])
 
   return (
     <PageLayout>

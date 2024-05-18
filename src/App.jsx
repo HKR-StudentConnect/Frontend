@@ -61,7 +61,7 @@ function App() {
           }
         />
         <Route
-          path='/follows'
+          path='/profile/:userId/follows'
           element={
             <RequireAuth>
               <Follows />
@@ -69,7 +69,7 @@ function App() {
           }
         />
         <Route
-          path='/followers'
+          path='/profile/:userId/followers'
           element={
             <RequireAuth>
               <Followers />

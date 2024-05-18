@@ -11,7 +11,7 @@ const FeedProfile = ({ user }) => {
       const users = await Promise.all(
         user.follows.map(async followeeId => {
           const data = await getPublicUserInfo(followeeId)
-          return { ...data, _id: followeeId }
+          return data
         })
       )
       setFollows(users)
