@@ -1,7 +1,12 @@
 import { loginUser, registerUser } from '../../api/auth'
 import { createPost } from '../../api/post'
 import { resetUser } from '../../api/storage'
-import { followUser, getUserInfo, unfollowUser } from '../../api/user'
+import {
+  followUser,
+  getUserInfo,
+  unfollowUser,
+  updateUserInfo,
+} from '../../api/user'
 import {
   setUser,
   logoutUser,
@@ -40,6 +45,17 @@ export const userLogout = () => async dispatch => {
     dispatch(logoutUser())
     resetUser()
     return { success: true }
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const updateUserAction = (userId, data) => async dispatch => {
+  try {
+    const response = await updateUserInfo(userId, data)
+    if (response.status === 200) {
+      dispatch(setUser(response.data))
+    }
   } catch (error) {
     console.error(error)
   }

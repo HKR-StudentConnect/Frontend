@@ -15,6 +15,15 @@ export const getUserInfo = async userId => {
   }
 }
 
+export const updateUserInfo = async (userId, data) => {
+  try {
+    const response = await baseInstance.put(`${userSuffix}/${userId}`, data)
+    return response
+  } catch (error) {
+    console.error('Failed updating user profile:', error)
+  }
+}
+
 export const getPublicUserInfo = async userId => {
   try {
     const response = await baseInstance.get(`${userSuffix}/public/${userId}`)
