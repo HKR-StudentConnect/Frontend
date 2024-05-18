@@ -1,6 +1,7 @@
 import {
   createComment,
   deleteComment,
+  deletePost,
   getPosts,
   likePost,
   unlikePost,
@@ -10,6 +11,7 @@ import {
   fetchPostsFailure,
   fetchPostsRequest,
   fetchPostsSuccess,
+  removePost,
   updatePost,
 } from '../slices/postSlice'
 
@@ -20,6 +22,13 @@ export const fetchUserPosts = userId => async dispatch => {
     dispatch(fetchPostsSuccess(data))
   } catch (error) {
     dispatch(fetchPostsFailure(error.message))
+  }
+}
+
+export const deletePostAction = postId => async dispatch => {
+  const response = await deletePost(postId)
+  if (response.status === 200) {
+    dispatch(removePost(postId))
   }
 }
 

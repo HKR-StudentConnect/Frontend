@@ -7,11 +7,13 @@ import ProfilePicture from '../user/profilePicture'
 import {
   addCommentAction,
   deleteCommentAction,
+  deletePostAction,
   likePostAction,
   unlikePostAction,
 } from '../../store/actions/postActions'
 import { useDispatch } from 'react-redux'
 import { getPublicUserInfo } from '../../api/user'
+import { MdDelete } from 'react-icons/md'
 
 const Post = ({ post, currentUser }) => {
   const dispatch = useDispatch()
@@ -58,18 +60,29 @@ const Post = ({ post, currentUser }) => {
     }
   }
 
+  const deletePost = () => {
+    dispatch(deletePostAction(post._id))
+  }
+
   return (
     <div className='bg-white p-6 rounded-xl mb-4'>
-      <div className='flex items-center mb-2'>
-        <ProfilePicture
-          imageUrl={currentUser.profile.profilePictureUrl}
-          width={8}
-          height={8}
-        />
-        <div>
-          <p className='font-semibold'>{currentUser.username}</p>
-          <p className='text-xs text-gray-500'>{'June 21, 12:45 pm'}</p>
+      <div className='flex justify-between items-center'>
+        <div className='flex items-center mb-2'>
+          <ProfilePicture
+            imageUrl={currentUser.profile.profilePictureUrl}
+            width={8}
+            height={8}
+          />
+          <div>
+            <p className='font-semibold'>{currentUser.username}</p>
+            <p className='text-xs text-gray-500'>{'June 21, 12:45 pm'}</p>
+          </div>
         </div>
+        {post.authorId === currentUser._id ? (
+          <button onClick={deletePost}>
+            <MdDelete className='text-red text-xl' />
+          </button>
+        ) : null}
       </div>
       <p className='mb-4'>{post.content.text}</p>
       {post.content.imageUrl ? (

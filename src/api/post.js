@@ -25,6 +25,15 @@ export const createPost = async (text, imageUrl) => {
   }
 }
 
+export const deletePost = async postId => {
+  try {
+    const response = await baseInstance.delete(`${postSuffix}/${postId}`)
+    return response
+  } catch (error) {
+    console.error('Error creating post:', error.response.data)
+  }
+}
+
 export const likePost = async (postId, userId) => {
   try {
     const response = await baseInstance.post(`${postSuffix}/${postId}/like`, {

@@ -30,6 +30,9 @@ const postSlice = createSlice({
         state.data[index] = action.payload
       }
     },
+    removePost: (state, action) => {
+      state.data = state.data.filter(post => post._id !== action.payload)
+    },
     commentUpdated: (state, action) => {
       const postData = action.payload.data
       const index = state.data.findIndex(post => post._id === postData._id)
@@ -45,6 +48,7 @@ export const {
   fetchPostsSuccess,
   fetchPostsFailure,
   updatePost,
+  removePost,
   commentUpdated,
 } = postSlice.actions
 export default postSlice.reducer
