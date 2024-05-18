@@ -1,7 +1,18 @@
 import React from 'react'
 import ProfilePicture from '../user/profilePicture'
+import { useNavigate } from 'react-router-dom'
 
 const ProfileHeader = ({ user }) => {
+  const navigate = useNavigate()
+
+  const navigateToFollowers = () => {
+    navigate('/followers')
+  }
+
+  const navigateToFollows = () => {
+    navigate('/follows')
+  }
+
   return (
     <div className='bg-background2 p-12 rounded-2xl'>
       <div className='flex items-center space-x-16 text-black'>
@@ -16,10 +27,13 @@ const ProfileHeader = ({ user }) => {
             <div className='text-lg'>
               <strong>{user.posts.length}</strong> posts
             </div>
-            <div className='text-lg'>
+            <div
+              className='text-lg cursor-pointer'
+              onClick={navigateToFollowers}
+            >
               <strong>{user.followers.length}</strong> followers
             </div>
-            <div className='text-lg'>
+            <div className='text-lg cursor-pointer' onClick={navigateToFollows}>
               <strong>{user.follows.length}</strong> following
             </div>
           </div>
