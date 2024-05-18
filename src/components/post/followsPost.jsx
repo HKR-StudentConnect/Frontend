@@ -12,6 +12,7 @@ import {
 } from '../../store/actions/followsPostAction'
 import { useDispatch } from 'react-redux'
 import { getPublicUserInfo } from '../../api/user'
+import { formatDate } from '../../utils/dateFormatter'
 
 const FollowsPost = ({ post, currentUser }) => {
   const dispatch = useDispatch()
@@ -76,7 +77,7 @@ const FollowsPost = ({ post, currentUser }) => {
         />
         <div>
           <p className='font-semibold'>{author?.username || post.authorId}</p>
-          <p className='text-xs text-gray-500'>{'June 21, 12:45 pm'}</p>
+          <p className='text-xs text-gray-500'>{formatDate(post.createdAt)}</p>
         </div>
       </div>
       <p className='mb-4'>{post.content.text}</p>

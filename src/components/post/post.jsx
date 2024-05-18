@@ -14,6 +14,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { getPublicUserInfo } from '../../api/user'
 import { MdDelete } from 'react-icons/md'
+import { formatDate } from '../../utils/dateFormatter'
 
 const Post = ({ post, currentUser }) => {
   const dispatch = useDispatch()
@@ -75,7 +76,9 @@ const Post = ({ post, currentUser }) => {
           />
           <div>
             <p className='font-semibold'>{currentUser.username}</p>
-            <p className='text-xs text-gray-500'>{'June 21, 12:45 pm'}</p>
+            <p className='text-xs text-gray-500'>
+              {formatDate(post.createdAt)}
+            </p>
           </div>
         </div>
         {post.authorId === currentUser._id ? (

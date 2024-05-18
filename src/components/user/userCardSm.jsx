@@ -29,7 +29,10 @@ const UserCardSm = ({ user }) => {
 
   return (
     <div className='bg-white flex items-center justify-between px-4 py-2 rounded-xl mb-2 border border-primary border-opacity-30'>
-      <div className='flex items-center flex-1' onClick={navigateToProfile}>
+      <div
+        className='flex items-center flex-1 cursor-pointer'
+        onClick={navigateToProfile}
+      >
         <ProfilePicture
           imageUrl={user.profile.profilePictureUrl}
           width={10}
