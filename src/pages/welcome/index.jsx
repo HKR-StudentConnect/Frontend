@@ -1,48 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import introimage from '../../assets/intro.jpg'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../../index.css';
 
 const Welcome = () => {
-  const quotes = [
-    'Missing out the chill in your life? lets connect!',
-    'Stay in loop and connect with Pears.',
-    'your ulitmate social hub!.',
-  ]
-
-  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
-
   return (
-    <div className='bg-primary min-h-screen flex flex-col justify-center items-center'>
-      <div className='bg-white rounded-full h-64 w-64  mb-8 flex justify-center items-center'>
-        <img
-          src={introimage}
-          alt='myimage'
-          className='h-full w-full object-cover rounded-full'
-        />
-      </div>
-      <h1 className='text-3xl text-white font-bold mb-8'>
-        Welcome to Student Connect
-      </h1>
-      <div className='flex'>
-        <Link
-          to='/register'
-          className='bg-secondary hover:bg-blue-700 text-black font-bold py-4 px-16 rounded-xl mr-4'
-        >
-          Sign Up
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+      <h1 className="text-4xl font-bold mb-8">Welcome to Student Connect</h1>
+      <p className="mb-8">your ultimate social hub!</p>
+      <div className="flex space-x-4">
+        <Link to="/register">
+          <button className="bg-secondary hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Sign Up
+          </button>
         </Link>
-        <Link
-          to='/login'
-          className='bg-secondary hover:bg-blue-700 text-black font-bold py-4 px-16 rounded-xl'
-        >
-          Sign In
+        <Link to="/login">
+          <button className="bg-secondary hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Sign In
+          </button>
         </Link>
-      </div>
-
-      <div className='mt-8 font-semibold italic text-background'>
-        {randomQuote}
+        <Link to="/admin-login">
+          <button className="bg-secondary hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Log In as Admin
+          </button>
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Welcome
+export default Welcome;
+

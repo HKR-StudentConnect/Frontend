@@ -1,3 +1,4 @@
+//frontend/src/components/feed/feedProfile.jsx
 import React from 'react'
 import FollowingUserCard from './followingUserCard'
 

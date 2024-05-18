@@ -1,3 +1,4 @@
+//frontend/src/api/storage.js
 export function storeToken(token) {
   localStorage.setItem('token', token)
 }

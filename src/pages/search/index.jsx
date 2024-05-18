@@ -1,3 +1,4 @@
+//frontend/src/pages/search/index.jsx
 import React, { useEffect, useState } from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import { useParams } from 'react-router-dom'

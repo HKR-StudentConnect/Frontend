@@ -1,3 +1,4 @@
+//frontend/src/pages/settings/index.jsx
 import React, { useState, useEffect } from 'react';
 import PageLayout from '../../layouts/pageLayout';
 const Settings = () => {

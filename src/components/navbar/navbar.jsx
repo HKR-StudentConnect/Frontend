@@ -1,3 +1,4 @@
+//frontend/src/components/navbar/navbar.jsx
 import React, { useState } from 'react'
 import MenuItem from './menuItem'
 import logo from '../../assets/logo.png'

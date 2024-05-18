@@ -1,8 +1,12 @@
+//frontend/src/api/api.js
 import axios from 'axios'
 import { getToken, handleTokenError } from './storage'
 
 const baseInstance = axios.create({
   baseURL: 'http://localhost:5000/',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 
 baseInstance.interceptors.request.use(

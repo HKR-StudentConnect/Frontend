@@ -1,3 +1,4 @@
+//frontend/src/components/feed/feedRight.jsx
 import React from 'react'
 
 const FeedRight = () => {

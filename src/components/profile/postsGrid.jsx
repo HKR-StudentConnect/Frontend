@@ -1,3 +1,4 @@
+//frontend/src/components/profile/postGrid.jsx
 import React from 'react'
 
 const PostsGrid = ({ posts }) => {

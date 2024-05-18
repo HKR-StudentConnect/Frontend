@@ -1,3 +1,4 @@
+//frontend/src/components/post/commentCard.jsx
 import React from 'react'
 import { MdDelete } from 'react-icons/md'
 

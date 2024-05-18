@@ -1,3 +1,4 @@
+//frontend/src/api/notification.js
 import baseInstance from './api'
 
 const notificationSuffix = '/notification'

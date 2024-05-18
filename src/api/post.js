@@ -1,3 +1,4 @@
+//frontend/src/api/post.js
 import baseInstance from './api'
 
 const postSuffix = '/posts'

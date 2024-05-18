@@ -1,3 +1,4 @@
+//frontend/src/pages/notifications/index.jsx
 import React, { useState, useEffect } from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import { useSelector } from 'react-redux'

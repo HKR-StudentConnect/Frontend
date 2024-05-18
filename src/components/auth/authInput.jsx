@@ -1,3 +1,4 @@
+//frontend/src/components/auth/authInput.jsx
 import React from 'react'
 
 const AuthInput = ({ label, value, onChangeText, ...textInputConfig }) => {

@@ -1,3 +1,4 @@
+//frontend/src/pages/profile/index.jsx
 import React from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import { useSelector } from 'react-redux'

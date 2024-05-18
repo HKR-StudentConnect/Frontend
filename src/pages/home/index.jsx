@@ -1,3 +1,4 @@
+//frontend/src/pages/home/index.jsx
 import React from 'react'
 import PostsSection from '../../components/post/postsSection'
 import FeedProfile from '../../components/feed/feedProfile'

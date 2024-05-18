@@ -1,3 +1,4 @@
+//frontend/src/components/footer/footer.jsx
 import React from 'react'
 
 const Footer = () => {

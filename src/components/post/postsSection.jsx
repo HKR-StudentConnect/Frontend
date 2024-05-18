@@ -1,3 +1,4 @@
+//frontend/src/components/post/postSection.jsx
 import React, { useEffect, useState } from 'react'
 import Post from './post'
 import CreatePostButton from './createPostButton'

@@ -1,3 +1,4 @@
+//frontend/src/components/profile/header.jsx
 import React from 'react'
 
 const Header = ({ user }) => {

@@ -1,3 +1,4 @@
+//frontend/src/components/feed/followingUserCard.jsx
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { followAUser, unfollowAUser } from '../../store/actions/userActions'

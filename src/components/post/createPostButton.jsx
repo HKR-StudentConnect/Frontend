@@ -1,3 +1,4 @@
+//frontend/src/components/post/createPostButton.jsx
 import React from 'react'
 
 const CreatePostButton = ({ user, onClick }) => {
