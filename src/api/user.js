@@ -15,6 +15,24 @@ export const getUserInfo = async userId => {
   }
 }
 
+export const updateUserInfo = async (userId, data) => {
+  try {
+    const response = await baseInstance.put(`${userSuffix}/${userId}`, data)
+    return response
+  } catch (error) {
+    console.error('Failed updating user profile:', error)
+  }
+}
+
+export const getPublicUserInfo = async userId => {
+  try {
+    const response = await baseInstance.get(`${userSuffix}/public/${userId}`)
+    return response.data
+  } catch (error) {
+    console.error('Get public user failed:', error)
+  }
+}
+
 export const getUserFollowers = async userId => {
   try {
     const response = await baseInstance.get(`${userSuffix}/${userId}/followers`)
@@ -38,7 +56,7 @@ export const followUser = async (userId, followeeId) => {
     const response = await baseInstance.post(`${userSuffix}/${userId}/follow`, {
       followeeId: followeeId,
     })
-    return response.data
+    return response
   } catch (error) {
     console.error('Error following user:', error.response.data)
   }
@@ -49,7 +67,7 @@ export const unfollowUser = async (userId, followeeId) => {
     const response = await baseInstance.delete(
       `${userSuffix}/${userId}/unfollow?followeeId=${followeeId}`
     )
-    return response.data
+    return response
   } catch (error) {
     console.error('Error unfollowing user:', error.response.data)
   }

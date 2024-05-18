@@ -7,8 +7,10 @@ import Notifications from './pages/notifications/index.jsx'
 import Profile from './pages/profile/index.jsx'
 import Settings from './pages/settings/index.jsx'
 import RequireAuth from '../src/components/requireAuth.jsx'
-import Search from './pages/search/index.js'
-import Admin from './pages/admin/index.js'
+import Search from './pages/search/index.jsx'
+import Admin from './pages/admin/index.jsx'
+import Follows from './pages/users/follows.jsx'
+import Followers from './pages/users/followers.jsx'
 
 function App() {
   return (
@@ -35,7 +37,7 @@ function App() {
           }
         />
         <Route
-          path='/profile'
+          path='/profile/:userId'
           element={
             <RequireAuth>
               <Profile />
@@ -55,6 +57,22 @@ function App() {
           element={
             <RequireAuth>
               <Search />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/profile/:userId/follows'
+          element={
+            <RequireAuth>
+              <Follows />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/profile/:userId/followers'
+          element={
+            <RequireAuth>
+              <Followers />
             </RequireAuth>
           }
         />

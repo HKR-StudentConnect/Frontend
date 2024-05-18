@@ -5,25 +5,28 @@ import { FaCommentAlt } from 'react-icons/fa'
 import CommentCard from './commentCard'
 import ProfilePicture from '../user/profilePicture'
 import {
-  addCommentAction,
-  deleteCommentAction,
-  deletePostAction,
-  likePostAction,
-  unlikePostAction,
-} from '../../store/actions/postActions'
+  addFollowsPostCommentAction,
+  deleteFollowsPostCommentAction,
+  likeFollowsPostAction,
+  unlikeFollowsPostAction,
+} from '../../store/actions/followsPostAction'
 import { useDispatch } from 'react-redux'
 import { getPublicUserInfo } from '../../api/user'
-import { MdDelete } from 'react-icons/md'
 import { formatDate } from '../../utils/dateFormatter'
 
-const Post = ({ post, currentUser }) => {
+const FollowsPost = ({ post, currentUser }) => {
   const dispatch = useDispatch()
   const [showComments, setShowComments] = useState(false)
   const [newComment, setNewComment] = useState('')
   const [commentUsers, setCommentUsers] = useState({})
   const likeStatus = post.likes.some(like => like.userId === currentUser._id)
+  const [author, setAuthor] = useState('')
 
   useEffect(() => {
+    const fetchPostAuthor = async () => {
+      const userData = await getPublicUserInfo(post.authorId)
+      setAuthor(userData)
+    }
     const fetchCommentUsers = async () => {
       const users = {}
       await Promise.all(
@@ -35,14 +38,15 @@ const Post = ({ post, currentUser }) => {
       setCommentUsers(users)
     }
 
+    fetchPostAuthor()
     fetchCommentUsers()
-  }, [post.comments])
+  }, [post.authorId, post.comments])
 
   const toggleLike = () => {
     if (!likeStatus) {
-      dispatch(likePostAction(post._id, currentUser._id))
+      dispatch(likeFollowsPostAction(post._id, currentUser._id))
     } else {
-      dispatch(unlikePostAction(post._id, currentUser._id))
+      dispatch(unlikeFollowsPostAction(post._id, currentUser._id))
     }
   }
 
@@ -51,41 +55,30 @@ const Post = ({ post, currentUser }) => {
   }
 
   const onDeleteComment = commentId => {
-    dispatch(deleteCommentAction(post._id, commentId))
+    dispatch(deleteFollowsPostCommentAction(post._id, commentId))
   }
 
   const addComment = () => {
     if (newComment.trim()) {
-      dispatch(addCommentAction(post._id, currentUser._id, newComment))
+      dispatch(
+        addFollowsPostCommentAction(post._id, currentUser._id, newComment)
+      )
       setNewComment('')
     }
   }
 
-  const deletePost = () => {
-    dispatch(deletePostAction(post._id))
-  }
-
   return (
     <div className='bg-white p-6 rounded-xl mb-4'>
-      <div className='flex justify-between items-center'>
-        <div className='flex items-center mb-2'>
-          <ProfilePicture
-            imageUrl={currentUser.profile.profilePictureUrl}
-            width={8}
-            height={8}
-          />
-          <div>
-            <p className='font-semibold'>{currentUser.username}</p>
-            <p className='text-xs text-gray-500'>
-              {formatDate(post.createdAt)}
-            </p>
-          </div>
+      <div className='flex items-center mb-2'>
+        <ProfilePicture
+          imageUrl={author?.profile?.profilePictureUrl || null}
+          width={8}
+          height={8}
+        />
+        <div>
+          <p className='font-semibold'>{author?.username || post.authorId}</p>
+          <p className='text-xs text-gray-500'>{formatDate(post.createdAt)}</p>
         </div>
-        {post.authorId === currentUser._id ? (
-          <button onClick={deletePost}>
-            <MdDelete className='text-red text-xl' />
-          </button>
-        ) : null}
       </div>
       <p className='mb-4'>{post.content.text}</p>
       {post.content.imageUrl ? (
@@ -162,4 +155,4 @@ const Post = ({ post, currentUser }) => {
   )
 }
 
-export default Post
+export default FollowsPost

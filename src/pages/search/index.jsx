@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import { useParams } from 'react-router-dom'
-import UserCard from '../../components/user/userCard'
+import UserCardLg from '../../components/user/userCardLg'
 import { getUsersByUsername } from '../../api/user'
 
 const Search = () => {
@@ -34,7 +34,7 @@ const Search = () => {
         </div>
         <div className='w-1/2 m-auto flex flex-col space-y-2'>
           {users.map(user => (
-            <UserCard user={user} />
+            <UserCardLg user={user} />
           ))}
         </div>
       </div>

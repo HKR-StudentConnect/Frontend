@@ -3,9 +3,9 @@ import { createPost } from '../../api/post'
 import { resetUser } from '../../api/storage'
 import {
   followUser,
-  getUserFollowsPosts,
   getUserInfo,
   unfollowUser,
+  updateUserInfo,
 } from '../../api/user'
 import {
   setUser,
@@ -13,7 +13,6 @@ import {
   addPost,
   addFollowee,
   removeFollowee,
-  fetchFollowsPosts,
 } from '../slices/userSlice'
 
 export const registerAndSetUser = data => async dispatch => {
@@ -51,40 +50,47 @@ export const userLogout = () => async dispatch => {
   }
 }
 
-export const createAndAddPost = (text, imageUrl) => async dispatch => {
+export const updateUserAction = (userId, data) => async dispatch => {
   try {
-    const post = await createPost(text, imageUrl)
-    dispatch(addPost(post))
-    return { success: true }
+    const response = await updateUserInfo(userId, data)
+    if (response.status === 200) {
+      dispatch(setUser(response.data))
+    }
   } catch (error) {
     console.error(error)
   }
 }
 
-export const followAUser = (userId, followeeId) => async dispatch => {
+export const createAndAddPost =
+  (text, imageUrl, currentUser) => async dispatch => {
+    try {
+      const post = await createPost(text, imageUrl)
+      post.author = currentUser
+      dispatch(addPost(post))
+      return { success: true }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+export const followUserAction = (userId, followeeId) => async dispatch => {
   try {
-    const followee = await followUser(userId, followeeId)
-    dispatch(addFollowee(followee))
-    return { success: true }
+    const response = await followUser(userId, followeeId)
+    if (response.status === 200) {
+      console.log(response.data)
+      dispatch(addFollowee(response.data))
+    }
   } catch (error) {
     console.error(error)
   }
 }
 
-export const unfollowAUser = (userId, followeeId) => async dispatch => {
+export const unfollowUserAction = (userId, followeeId) => async dispatch => {
   try {
-    const unfollowedUserId = await unfollowUser(userId, followeeId)
-    dispatch(removeFollowee(unfollowedUserId.followeeId))
-    return { success: true }
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-export const getFollowsPosts = userId => async dispatch => {
-  try {
-    const posts = await getUserFollowsPosts(userId)
-    dispatch(fetchFollowsPosts(posts))
+    const response = await unfollowUser(userId, followeeId)
+    if (response.status === 200) {
+      dispatch(removeFollowee(response.data))
+    }
   } catch (error) {
     console.error(error)
   }
