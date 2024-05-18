@@ -1,26 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { followAUser, unfollowAUser } from '../../store/actions/userActions'
+import {
+  followUserAction,
+  unfollowUserAction,
+} from '../../store/actions/userActions'
 import ProfilePicture from './profilePicture'
 
 const UserCardLg = ({ user }) => {
   const dispatch = useDispatch()
   const currentUser = useSelector(state => state.user.currentUser)
-  const [followStatus, setFollowStatus] = useState(
-    currentUser.follows.filter(followee => followee._id === user._id).length > 0
+  const followStatus = currentUser.follows.some(
+    followeeId => followeeId === user._id
   )
 
   const toggleFollow = async () => {
     if (followStatus) {
-      const result = await dispatch(unfollowAUser(currentUser._id, user._id))
-      if (result.success) {
-        setFollowStatus(false)
-      }
+      dispatch(unfollowUserAction(currentUser._id, user._id))
     } else {
-      const result = await dispatch(followAUser(currentUser._id, user._id))
-      if (result.success) {
-        setFollowStatus(true)
-      }
+      dispatch(followUserAction(currentUser._id, user._id))
     }
   }
 

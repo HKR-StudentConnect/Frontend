@@ -23,7 +23,7 @@ const userSlice = createSlice({
     },
     removeFollowee: (state, action) => {
       state.currentUser.follows = state.currentUser.follows.filter(
-        followee => followee._id !== action.payload
+        followeeId => followeeId !== action.payload
       )
     },
   },

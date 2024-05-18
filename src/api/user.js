@@ -47,7 +47,7 @@ export const followUser = async (userId, followeeId) => {
     const response = await baseInstance.post(`${userSuffix}/${userId}/follow`, {
       followeeId: followeeId,
     })
-    return response.data
+    return response
   } catch (error) {
     console.error('Error following user:', error.response.data)
   }
@@ -58,7 +58,7 @@ export const unfollowUser = async (userId, followeeId) => {
     const response = await baseInstance.delete(
       `${userSuffix}/${userId}/unfollow?followeeId=${followeeId}`
     )
-    return response.data
+    return response
   } catch (error) {
     console.error('Error unfollowing user:', error.response.data)
   }

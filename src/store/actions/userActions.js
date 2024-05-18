@@ -57,21 +57,24 @@ export const createAndAddPost =
     }
   }
 
-export const followAUser = (userId, followeeId) => async dispatch => {
+export const followUserAction = (userId, followeeId) => async dispatch => {
   try {
-    const followee = await followUser(userId, followeeId)
-    dispatch(addFollowee(followee))
-    return { success: true }
+    const response = await followUser(userId, followeeId)
+    if (response.status === 200) {
+      console.log(response.data)
+      dispatch(addFollowee(response.data))
+    }
   } catch (error) {
     console.error(error)
   }
 }
 
-export const unfollowAUser = (userId, followeeId) => async dispatch => {
+export const unfollowUserAction = (userId, followeeId) => async dispatch => {
   try {
-    const unfollowedUserId = await unfollowUser(userId, followeeId)
-    dispatch(removeFollowee(unfollowedUserId.followeeId))
-    return { success: true }
+    const response = await unfollowUser(userId, followeeId)
+    if (response.status === 200) {
+      dispatch(removeFollowee(response.data))
+    }
   } catch (error) {
     console.error(error)
   }
