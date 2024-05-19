@@ -113,7 +113,7 @@ function App() {
             />
           </>
         )}
-        {/* <Route path='*' element={<Welcome />} /> */}
+        <Route path='*' element={<Welcome />} />
       </Routes>
     </Router>
   )
