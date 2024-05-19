@@ -38,7 +38,7 @@ export const getUserFollowers = async userId => {
     const response = await baseInstance.get(`${userSuffix}/${userId}/followers`)
     return response.data
   } catch (error) {
-    console.error('Error fetching followers:', error.response.data)
+    console.error('Error fetching followers:', error)
   }
 }
 
@@ -47,7 +47,7 @@ export const getUserFollows = async userId => {
     const response = await baseInstance.get(`${userSuffix}/${userId}/follows`)
     return response.data
   } catch (error) {
-    console.error('Error fetching follows:', error.response.data)
+    console.error('Error fetching follows:', error)
   }
 }
 
@@ -58,7 +58,7 @@ export const followUser = async (userId, followeeId) => {
     })
     return response
   } catch (error) {
-    console.error('Error following user:', error.response.data)
+    console.error('Error following user:', error)
   }
 }
 
@@ -69,7 +69,7 @@ export const unfollowUser = async (userId, followeeId) => {
     )
     return response
   } catch (error) {
-    console.error('Error unfollowing user:', error.response.data)
+    console.error('Error unfollowing user:', error)
   }
 }
 
@@ -91,6 +91,6 @@ export const getUserFollowsPosts = async userId => {
     )
     return response.data
   } catch (error) {
-    console.error('Error fetching followers:', error.response.data)
+    console.error('Error fetching followers:', error)
   }
 }
