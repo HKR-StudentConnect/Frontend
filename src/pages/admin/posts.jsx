@@ -20,7 +20,7 @@ const AdminPostList = () => {
   const handleDelete = async postId => {
     const response = await deleteUserPost(postId)
     if (response.status === 200) {
-      setPosts(posts.filter(post => post.id !== postId))
+      setPosts(posts.filter(post => post._id !== postId))
     }
   }
 
@@ -29,7 +29,7 @@ const AdminPostList = () => {
       <div className='container mx-auto p-4'>
         {posts.length > 0 ? (
           posts.map(post => (
-            <PostComponent key={post.id} post={post} onDelete={handleDelete} />
+            <PostComponent key={post._id} post={post} onDelete={handleDelete} />
           ))
         ) : (
           <div>No posts available</div>

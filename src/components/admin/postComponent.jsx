@@ -24,7 +24,7 @@ const PostComponent = ({ post, onDelete }) => {
         </div>
       </div>
       <button
-        onClick={() => onDelete(post.id)}
+        onClick={() => onDelete(post._id)}
         className='bg-red text-white font-semibold px-3 py-1 rounded sm:ml-4'
       >
         Delete
