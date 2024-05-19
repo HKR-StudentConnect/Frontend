@@ -18,7 +18,6 @@ import AdminPostList from './pages/admin/posts.jsx'
 function App() {
   const currentUser = useSelector(state => state.user.currentUser)
   const userRole = currentUser?.role
-  console.log(userRole)
 
   return (
     <Router>
