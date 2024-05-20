@@ -40,6 +40,7 @@ const Navbar = () => {
             <MenuItem title={'Notifications'} to={'/notifications'} />
             <MenuItem title={'My Profile'} to={`/profile/${currentUser._id}`} />
             <MenuItem title={'Settings'} to={'/settings'} />
+            <MenuItem title={'About'} to={'/about'} />
             <button
               className='text-lg font-semibold text-white hover:font-bold hover:text-secondary py-2 px-4'
               onClick={handleLogout}

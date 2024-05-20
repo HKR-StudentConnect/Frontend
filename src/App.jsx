@@ -12,6 +12,7 @@ import Admin from './pages/admin/home.jsx'
 import AdminUserList from './pages/admin/users.jsx'
 import Follows from './pages/users/follows.jsx'
 import Followers from './pages/users/followers.jsx'
+import About from './pages/About/index.jsx'
 import { useSelector } from 'react-redux'
 import AdminPostList from './pages/admin/posts.jsx'
 
@@ -107,6 +108,14 @@ function App() {
               element={
                 <RequireAuth>
                   <Followers />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path='/about'
+              element={
+                <RequireAuth>
+                  <About />
                 </RequireAuth>
               }
             />
