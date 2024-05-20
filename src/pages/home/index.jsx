@@ -3,6 +3,7 @@ import PostsSection from '../../components/post/postsSection'
 import FeedProfile from '../../components/feed/feedProfile'
 import FeedRight from '../../components/feed/feedRight'
 import PageLayout from '../../layouts/pageLayout'
+import Chat from '../chat/chat'
 import { useSelector } from 'react-redux'
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
         </div>
       </div>
     </PageLayout>
+    
   )
 }
 
