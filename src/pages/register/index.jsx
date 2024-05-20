@@ -18,6 +18,7 @@ const Register = () => {
     confirmPassword: '',
     profilePicture: null,
   })
+  const [error, setError] = useState('')
 
   const handleChange = event => {
     if (event.target.name === 'profilePicture') {
@@ -43,13 +44,11 @@ const Register = () => {
     console.log('Form submitted:', JSON.stringify(obj))
 
     try {
-      const result = await dispatch(registerAndSetUser(obj))
-      console.log(result)
-      if (result.success) {
-        navigate('/')
-      }
+      await dispatch(registerAndSetUser(obj))
+      navigate('/')
     } catch (err) {
-      console.error('Login failed:', err)
+      console.log(err)
+      setError(err.message)
     }
   }
 
@@ -140,6 +139,12 @@ const Register = () => {
               </button>
             </div>
           </form>
+
+          {error && (
+            <p className='mt-4 text-center text-md text-red font-semibold'>
+              {error}
+            </p>
+          )}
 
           <p className='mt-10 text-center text-md text-white'>
             Already have an account?
