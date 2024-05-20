@@ -59,8 +59,10 @@ const Settings = () => {
 
   return (
     <PageLayout>
-      <div className='max-w-4xl mx-auto mt-4 p-8'>
-        <h1 className='text-3xl font-bold mb-8'>Account Settings</h1>
+      <div className='max-w-4xl mx-auto mt-2 md:mt-4 p-4 md:p-8'>
+        <h1 className='text-2xl md:text-3xl font-bold mb-8'>
+          Account Settings
+        </h1>
         {successMessage && (
           <div
             className='mb-4 p-4 text-md font-semibold text-white bg-gray rounded-lg'

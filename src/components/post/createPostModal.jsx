@@ -21,7 +21,7 @@ const CreatePostModal = ({ show, onClose, user }) => {
 
   return (
     <div className='bg-black bg-opacity-50 fixed inset-0 flex justify-center items-center z-50'>
-      <div className='bg-background p-6 rounded-lg shadow-lg max-w-lg w-full'>
+      <div className='bg-background m-6 sm:m-0 p-6 rounded-lg shadow-lg max-w-lg w-full'>
         <h2 className='text-xl font-semibold mb-4'>Create Post</h2>
         <form onSubmit={handleSubmit}>
           <textarea

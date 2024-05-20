@@ -15,7 +15,6 @@ const Notifications = () => {
         const response = await getNotifications(currentUser._id)
         if (response.status === 200) {
           const data = await response.data
-          console.log(data)
           setNotifications(data)
         } else {
           console.error('Failed to fetch notifications:', response.statusText)
@@ -33,26 +32,30 @@ const Notifications = () => {
       {!notifications ? (
         <div className='text-center'>Loading...</div>
       ) : (
-        <div className='container max-w-4xl mx-auto mt-10'>
-          <h1 className='text-3xl font-semibold mb-4'>Notifications</h1>
+        <div className='container max-w-4xl mx-auto p-3 md:p-10'>
+          <h1 className='text-2xl md:text-3xl font-semibold mb-4'>
+            Notifications
+          </h1>
           <div className='divide-y divide-gray-300'>
             {notifications.map(notification => (
-              <div key={notification._id} className='bg-white p-6 rounded-xl'>
+              <div
+                key={notification._id}
+                className='bg-white p-4 md:p-6 rounded-xl'
+              >
                 <div className='flex items-center justify-between'>
                   <div className='flex'>
                     <ProfilePicture
                       imageUrl={
                         notification.sender.profile.profilePictureUrl ?? null
                       }
-                      width={10}
-                      height={10}
+                      className={'w-10 h-10 mr-4'}
                     />
-                    <p className='py-2 text-lg'>
+                    <p className='py-2 text-sm md:text-lg'>
                       <strong>{notification.sender.username}</strong> started
                       following you
                     </p>
                   </div>
-                  <p className='text-sm font-semibold text-gray-500'>
+                  <p className='text-sm font-semibold text-black'>
                     {formatDate(notification.createdAt)}
                   </p>
                 </div>

@@ -32,7 +32,7 @@ const Search = () => {
         <div className=' p-12 text-center'>
           <p className='font-bold text-2xl'>Results for "{query}"</p>
         </div>
-        <div className='w-1/2 m-auto flex flex-col space-y-2'>
+        <div className='w-full lg:w-1/2 m-auto flex flex-col space-y-2'>
           {users.map(user => (
             <UserCardLg user={user} />
           ))}

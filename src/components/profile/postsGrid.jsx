@@ -17,9 +17,9 @@ const PostsGrid = ({ user, isCurrentUser }) => {
   }
 
   return (
-    <div className='p-4 my-4'>
-      <h2 className='text-2xl font-bold mb-4'>Posts</h2>
-      <div className='grid grid-cols-1 gap-4'>
+    <div className='py-2 md:p-4 my-4'>
+      <h2 className='text-xl sm:text-2xl font-bold mb-4'>Posts</h2>
+      <div className='grid grid-cols-1 gap-0 sm:gap-4'>
         {posts.map(post =>
           isCurrentUser ? (
             <Post key={post._id} post={post} currentUser={user} />

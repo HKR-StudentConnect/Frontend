@@ -37,6 +37,7 @@ const UserCardLg = ({ user }) => {
           imageUrl={user.profile.profilePictureUrl}
           width={16}
           height={16}
+          className={'w-16 h-16 mr-4'}
         />
         <div>
           <p className='font-semibold text-lg'>{user.profile.name}</p>

@@ -35,11 +35,12 @@ const UserCardSm = ({ user }) => {
       >
         <ProfilePicture
           imageUrl={user.profile.profilePictureUrl}
-          width={10}
-          height={10}
+          className={'w-10 h-10 mr-2'}
         />
         <div>
-          <p className='font-semibold text-md'>{user.profile.name}</p>
+          <p className='font-semibold text-sm lg:text-md'>
+            {user.profile.name}
+          </p>
           <p className='text-gray text-sm'>@{user.username}</p>
         </div>
       </div>

@@ -72,8 +72,7 @@ const FollowsPost = ({ post, currentUser }) => {
       <div className='flex items-center mb-2'>
         <ProfilePicture
           imageUrl={author?.profile?.profilePictureUrl || null}
-          width={8}
-          height={8}
+          className={'w-8 h-8 mr-4'}
         />
         <div>
           <p className='font-semibold'>{author?.username || post.authorId}</p>
