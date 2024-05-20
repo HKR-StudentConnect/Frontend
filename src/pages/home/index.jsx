@@ -10,14 +10,14 @@ const Home = () => {
 
   return (
     <PageLayout>
-      <div className='flex justify-between p-4'>
-        <div className='w-1/3 p-4'>
+      <div className='flex flex-col lg:flex-row justify-between lg:p-4'>
+        <div className='w-full lg:w-1/3 hidden lg:block p-4'>
           <FeedProfile user={currentUser} />
         </div>
-        <div className='w-1/2 p-4'>
+        <div className='w-full lg:w-1/2 p-4'>
           <PostsSection user={currentUser} />
         </div>
-        <div className='p-4 w-2/5'>
+        <div className='w-full lg:w-2/5 hidden lg:block p-4'>
           <FeedRight />
         </div>
       </div>

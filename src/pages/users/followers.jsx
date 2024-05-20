@@ -42,7 +42,7 @@ const Followers = () => {
   return (
     <PageLayout>
       <div className='h-screen'>
-        <div className=' p-12 text-center'>
+        <div className='p-8 md:p-12 text-center'>
           <p className='font-bold text-2xl'>Followers</p>
         </div>
         <UsersList users={followers} />

@@ -26,8 +26,7 @@ const FeedProfile = ({ user }) => {
         <div className='rounded-full border-8 border-secondary w-36 h-36 mb-4'>
           <ProfilePicture
             imageUrl={user.profile.profilePictureUrl}
-            width={'full'}
-            height={'full'}
+            className={'w-full h-full'}
           />
         </div>
         <h2 className='font-bold mb-2'>{user.username}</h2>

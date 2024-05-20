@@ -14,32 +14,34 @@ const ProfileHeader = ({ user }) => {
   }
 
   return (
-    <div className='bg-background2 p-12 rounded-2xl'>
-      <div className='flex items-center space-x-16 text-black'>
+    <div className='sm:bg-background2 sm:p-12 rounded-2xl'>
+      <div className='flex md:items-center space-x-8 sm:space-x-16 text-black'>
         <ProfilePicture
           imageUrl={user.profile.profilePictureUrl}
-          width={36}
-          height={36}
+          className={'w-16 md:w-36 h-16 md:h-36 mr-4'}
         />
         <div className='w-1/2'>
-          <h1 className='text-xl font-bold'>{user.username}</h1>
-          <div className='flex space-x-16 my-4'>
-            <div className='text-lg'>
+          <h1 className='text-lg sm:text-xl font-bold'>{user.username}</h1>
+          <div className='flex space-x-8 md:space-x-16 my-4'>
+            <div className='text-sm sm:text-lg'>
               <strong>{user.posts.length}</strong> posts
             </div>
             <div
-              className='text-lg cursor-pointer'
+              className='text-sm sm:text-lg cursor-pointer'
               onClick={navigateToFollowers}
             >
               <strong>{user.followers.length}</strong> followers
             </div>
-            <div className='text-lg cursor-pointer' onClick={navigateToFollows}>
+            <div
+              className='text-sm sm:text-lg cursor-pointer'
+              onClick={navigateToFollows}
+            >
               <strong>{user.follows.length}</strong> following
             </div>
           </div>
-          <h1 className='text-lg font-bold'>{user.profile.name}</h1>
-          <p className='text-lg'>{user.profile.bio}</p>
-          <p className='text-lg'>{user.profile.university}</p>
+          <h1 className='text-md sm:text-lg font-bold'>{user.profile.name}</h1>
+          <p className='text-md sm:text-lg'>{user.profile.bio}</p>
+          <p className='text-md sm:text-lg'>{user.profile.university}</p>
         </div>
       </div>
     </div>

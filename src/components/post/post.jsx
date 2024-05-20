@@ -71,8 +71,7 @@ const Post = ({ post, currentUser }) => {
         <div className='flex items-center mb-2'>
           <ProfilePicture
             imageUrl={currentUser.profile.profilePictureUrl}
-            width={8}
-            height={8}
+            className={'w-8 h-8 mr-4'}
           />
           <div>
             <p className='font-semibold'>{currentUser.username}</p>

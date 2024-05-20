@@ -20,19 +20,19 @@ const Welcome = () => {
           className='h-full w-full object-cover rounded-full'
         />
       </div>
-      <h1 className='text-3xl text-white font-bold mb-8'>
+      <h1 className='text-2xl sm:text-3xl text-white font-bold mb-8'>
         Welcome to Student Connect
       </h1>
       <div className='flex'>
         <Link
           to='/register'
-          className='bg-secondary hover:bg-blue-700 text-black font-bold py-4 px-16 rounded-xl mr-4'
+          className='bg-secondary hover:bg-background text-black font-bold py-4 px-12 sm:px-16 rounded-xl mr-4'
         >
           Sign Up
         </Link>
         <Link
           to='/login'
-          className='bg-secondary hover:bg-blue-700 text-black font-bold py-4 px-16 rounded-xl'
+          className='bg-secondary hover:bg-blue-700 text-black font-bold py-4 px-12 sm:px-16 rounded-xl'
         >
           Sign In
         </Link>

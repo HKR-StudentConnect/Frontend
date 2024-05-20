@@ -63,11 +63,6 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <div className='text-md'>
-                  <Link to='#' className='font-semibold text-secondary'>
-                    Forgot password?
-                  </Link>
-                </div>
               </div>
               <div className='mt-2'>
                 <input
