@@ -10,7 +10,11 @@ export const registerUser = async data => {
     })
     return response.status
   } catch (error) {
-    console.error('Registration failed:', error.response.data)
+    if (error.response && error.response.data && error.response.data.message) {
+      throw new Error(error.response.data.message)
+    } else {
+      throw new Error('Registration failed')
+    }
   }
 }
 
@@ -25,6 +29,10 @@ export const loginUser = async (email, password) => {
     storeUserId(userId)
     return userId
   } catch (error) {
-    console.error('Login failed:', error)
+    if (error.response && error.response.data && error.response.data.message) {
+      throw new Error(error.response.data.message)
+    } else {
+      throw new Error('An error occurred during login')
+    }
   }
 }

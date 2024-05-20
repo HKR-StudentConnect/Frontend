@@ -1,6 +1,6 @@
 import baseInstance from './api'
 
-const notificationSuffix = '/notification'
+const notificationSuffix = '/notifications'
 
 export const getNotifications = async userId => {
   try {

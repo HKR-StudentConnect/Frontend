@@ -9,6 +9,7 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,14 +25,10 @@ const Login = () => {
     console.log('Form submitted:', formData)
 
     try {
-      const result = await dispatch(
-        loginAndSetUser(formData.email, formData.password)
-      )
-      if (result.success) {
-        navigate('/')
-      }
+      await dispatch(loginAndSetUser(formData.email, formData.password))
+      navigate('/')
     } catch (err) {
-      console.error('Login failed:', err)
+      setError(err.message)
     }
   }
 
@@ -94,6 +91,12 @@ const Login = () => {
               </button>
             </div>
           </form>
+
+          {error && (
+            <p className='mt-4 text-center text-md text-red font-semibold'>
+              {error}
+            </p>
+          )}
 
           <p className='mt-10 text-center text-md text-white'>
             Don't have an account?

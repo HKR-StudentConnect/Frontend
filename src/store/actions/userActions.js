@@ -20,23 +20,25 @@ export const registerAndSetUser = data => async dispatch => {
     const result = await registerUser(data)
     if (result === 201) {
       const userId = await loginUser(data.email, data.password)
-      const user = await getUserInfo(userId)
-      dispatch(setUser(user))
-      return { success: true }
+      if (userId) {
+        const user = await getUserInfo(userId)
+        dispatch(setUser(user))
+      }
     }
   } catch (error) {
-    console.error('Registration failed:' + error)
+    throw new Error(error.message)
   }
 }
 
 export const loginAndSetUser = (email, password) => async dispatch => {
   try {
     const userId = await loginUser(email, password)
-    const user = await getUserInfo(userId)
-    dispatch(setUser(user))
-    return { success: true }
+    if (userId) {
+      const user = await getUserInfo(userId)
+      dispatch(setUser(user))
+    }
   } catch (error) {
-    console.error('Error logging in user:' + error)
+    throw new Error(error.message)
   }
 }
 
