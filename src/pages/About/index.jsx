@@ -1,7 +1,7 @@
 
 import React from 'react';
 import PageLayout from '../../layouts/pageLayout';
-import universityImage from '../../assets/university.jpeg'; // Make sure to have an image of your university in the assets folder
+import universityImage from '../../assets/university.jpeg'; 
 
 const teamMembers = [
   { name: "Ahmed Mohammed", role: "Project Manager", bio: "Ahmed is responsible for overseeing the project and ensuring all milestones are met." },
