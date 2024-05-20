@@ -30,7 +30,7 @@ To run this project locally, follow these steps:
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/social-media-app.git
+https://github.com/HKR-StudentConnect/frontend.git
  ```
 
 Go the project folder
