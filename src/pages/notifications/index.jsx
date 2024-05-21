@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { getNotifications } from '../../api/notification'
 import { formatDate } from '../../utils/dateFormatter'
 import ProfilePicture from '../../components/user/profilePicture'
+import Loading from '../../components/loading'
 
 const Notifications = () => {
   const currentUser = useSelector(state => state.user.currentUser)
@@ -30,7 +31,7 @@ const Notifications = () => {
   return (
     <PageLayout>
       {!notifications ? (
-        <div className='text-center'>Loading...</div>
+        <Loading />
       ) : (
         <div className='container max-w-4xl mx-auto p-3 md:p-10'>
           <h1 className='text-2xl md:text-3xl font-semibold mb-4'>
@@ -46,7 +47,7 @@ const Notifications = () => {
                   <div className='flex'>
                     <ProfilePicture
                       imageUrl={
-                        notification.sender?.profile?.profilePictureUrl ?? null
+                        notification.sender?.profile?.profilePictureUrl || null
                       }
                       className={'w-10 h-10 mr-4'}
                     />

@@ -4,26 +4,30 @@ import { FaHeart } from 'react-icons/fa'
 import { FaCommentAlt } from 'react-icons/fa'
 import CommentCard from './commentCard'
 import ProfilePicture from '../user/profilePicture'
-import {
-  addCommentAction,
-  deleteCommentAction,
-  deletePostAction,
-  likePostAction,
-  unlikePostAction,
-} from '../../store/actions/postActions'
-import { useDispatch } from 'react-redux'
 import { getPublicUserInfo } from '../../api/user'
-import { MdDelete } from 'react-icons/md'
 import { formatDate } from '../../utils/dateFormatter'
+import {
+  createComment,
+  deleteComment,
+  likePost,
+  unlikePost,
+} from '../../api/post'
 
-const Post = ({ post, currentUser }) => {
-  const dispatch = useDispatch()
+const ProfilePost = ({ post, currentUser }) => {
+  const [comments, setComments] = useState(post.comments)
   const [showComments, setShowComments] = useState(false)
   const [newComment, setNewComment] = useState('')
   const [commentUsers, setCommentUsers] = useState({})
-  const likeStatus = post.likes.some(like => like.userId === currentUser._id)
+  const [likeStatus, setLikeStatus] = useState(
+    post.likes.some(like => like.userId === currentUser._id)
+  )
+  const [author, setAuthor] = useState('')
 
   useEffect(() => {
+    const fetchPostAuthor = async () => {
+      const userData = await getPublicUserInfo(post.authorId)
+      setAuthor(userData)
+    }
     const fetchCommentUsers = async () => {
       const users = {}
       await Promise.all(
@@ -35,14 +39,21 @@ const Post = ({ post, currentUser }) => {
       setCommentUsers(users)
     }
 
+    fetchPostAuthor()
     fetchCommentUsers()
-  }, [post.comments])
+  }, [post.authorId, post.comments])
 
-  const toggleLike = () => {
+  const toggleLike = async () => {
     if (!likeStatus) {
-      dispatch(likePostAction(post._id, currentUser._id))
+      const response = await likePost(post._id, currentUser._id)
+      if (response.status === 200) {
+        setLikeStatus(true)
+      }
     } else {
-      dispatch(unlikePostAction(post._id, currentUser._id))
+      const response = await unlikePost(post._id, currentUser._id)
+      if (response.status === 200) {
+        setLikeStatus(false)
+      }
     }
   }
 
@@ -50,41 +61,39 @@ const Post = ({ post, currentUser }) => {
     setShowComments(!showComments)
   }
 
-  const onDeleteComment = commentId => {
-    dispatch(deleteCommentAction(post._id, commentId))
+  const onDeleteComment = async commentId => {
+    const response = await deleteComment(post._id, commentId)
+    if (response.status === 200) {
+      setComments(comments.filter(comment => comment._id !== commentId))
+    }
   }
 
-  const addComment = () => {
+  const addComment = async () => {
     if (newComment.trim()) {
-      dispatch(addCommentAction(post._id, currentUser._id, newComment))
+      const response = await createComment(
+        post._id,
+        currentUser._id,
+        newComment
+      )
+      if (response.status === 200) {
+        const updatedPost = response.data
+        setComments(updatedPost.comments)
+      }
       setNewComment('')
     }
   }
 
-  const deletePost = () => {
-    dispatch(deletePostAction(post._id))
-  }
-
   return (
     <div className='bg-white p-6 rounded-xl mb-4'>
-      <div className='flex justify-between items-center'>
-        <div className='flex items-center mb-2'>
-          <ProfilePicture
-            imageUrl={currentUser.profile?.profilePictureUrl || null}
-            className={'w-8 h-8 mr-4'}
-          />
-          <div>
-            <p className='font-semibold'>{currentUser.username}</p>
-            <p className='text-xs text-gray-500'>
-              {formatDate(post.createdAt)}
-            </p>
-          </div>
+      <div className='flex items-center mb-2'>
+        <ProfilePicture
+          imageUrl={author?.profile?.profilePictureUrl || null}
+          className={'w-8 h-8 mr-4'}
+        />
+        <div>
+          <p className='font-semibold'>{author?.username || post.authorId}</p>
+          <p className='text-xs text-gray-500'>{formatDate(post.createdAt)}</p>
         </div>
-        {post.authorId === currentUser._id ? (
-          <button onClick={deletePost}>
-            <MdDelete className='text-red text-xl' />
-          </button>
-        ) : null}
       </div>
       <p className='mb-4'>{post.content.text}</p>
       {post.content.imageUrl ? (
@@ -119,7 +128,7 @@ const Post = ({ post, currentUser }) => {
       {showComments && (
         <div className='mt-4'>
           <div className='mb-4'>
-            {post.comments.map(comment => (
+            {comments.map(comment => (
               <CommentCard
                 key={comment._id}
                 username={commentUsers[comment.userId] || comment.userId}
@@ -161,4 +170,4 @@ const Post = ({ post, currentUser }) => {
   )
 }
 
-export default Post
+export default ProfilePost

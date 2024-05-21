@@ -34,7 +34,7 @@ const Search = () => {
         </div>
         <div className='w-full lg:w-1/2 m-auto flex flex-col space-y-2'>
           {users.map(user => (
-            <UserCardLg user={user} />
+            <UserCardLg key={user._id} user={user} />
           ))}
         </div>
       </div>

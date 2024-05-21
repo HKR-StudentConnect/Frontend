@@ -34,7 +34,7 @@ const UserCardSm = ({ user }) => {
         onClick={navigateToProfile}
       >
         <ProfilePicture
-          imageUrl={user.profile.profilePictureUrl}
+          imageUrl={user.profile?.profilePictureUrl || null}
           className={'w-10 h-10 mr-2'}
         />
         <div>

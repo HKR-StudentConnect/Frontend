@@ -34,7 +34,7 @@ const UserCardLg = ({ user }) => {
         onClick={navigateToProfile}
       >
         <ProfilePicture
-          imageUrl={user.profile.profilePictureUrl}
+          imageUrl={user.profile?.profilePictureUrl || null}
           width={16}
           height={16}
           className={'w-16 h-16 mr-4'}

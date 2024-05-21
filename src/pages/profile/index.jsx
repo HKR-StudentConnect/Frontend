@@ -5,6 +5,7 @@ import ProfileHeader from '../../components/profile/profileHeader'
 import PostsGrid from '../../components/profile/postsGrid'
 import { useParams } from 'react-router-dom'
 import { getPublicUserInfo } from '../../api/user'
+import Loading from '../../components/loading'
 
 const Profile = () => {
   const { userId } = useParams()
@@ -24,16 +25,16 @@ const Profile = () => {
     fetchUser()
   }, [userId, currentUser])
 
-  if (!user) {
-    return <div>loading...</div>
-  }
-
   return (
     <PageLayout>
-      <div className='max-w-4xl mx-auto mt-8 p-4 rounded-2xl'>
-        <ProfileHeader user={user} />
-        <PostsGrid user={user} isCurrentUser={userId === currentUser._id} />
-      </div>
+      {!user ? (
+        <Loading />
+      ) : (
+        <div className='max-w-4xl mx-auto mt-8 p-4 rounded-2xl'>
+          <ProfileHeader user={user} />
+          <PostsGrid user={user} isCurrentUser={userId === currentUser._id} />
+        </div>
+      )}
     </PageLayout>
   )
 }

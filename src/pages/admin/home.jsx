@@ -3,6 +3,7 @@ import AdminPageLayout from '../../layouts/adminPageLayout'
 import { getDashboardStats } from '../../api/admin'
 import AdminStats from '../../components/admin/stats'
 import AdminUserList from '../../components/admin/usersList'
+import Loading from '../../components/loading'
 
 export default function Admin() {
   const [stats, setStats] = useState(null)
@@ -18,19 +19,21 @@ export default function Admin() {
     getDashboardStat()
   }, [])
 
-  if (!stats) {
-    return <div>Loading...</div>
-  }
-
   return (
     <AdminPageLayout title={'Dashboard'}>
-      <div className='container mx-auto p-4 flex-col space-y-10'>
-        <AdminStats stats={stats} />
-        <div>
-          <h2 className='text-xl sm:text-2xl font-semibold mb-6 pl-4'>Users</h2>
-          <AdminUserList />
+      {!stats ? (
+        <Loading />
+      ) : (
+        <div className='container mx-auto p-4 flex-col space-y-10'>
+          <AdminStats stats={stats} />
+          <div>
+            <h2 className='text-xl sm:text-2xl font-semibold mb-6 pl-4'>
+              Users
+            </h2>
+            <AdminUserList />
+          </div>
         </div>
-      </div>
+      )}
     </AdminPageLayout>
   )
 }

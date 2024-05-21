@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import Post from '../post/post'
-import FollowsPost from '../post/followsPost'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserPosts } from '../../store/actions/postActions'
+import ProfilePost from '../post/profilePost'
+import Loading from '../../components/loading'
 
 const PostsGrid = ({ user, isCurrentUser }) => {
   const dispatch = useDispatch()
@@ -13,7 +14,7 @@ const PostsGrid = ({ user, isCurrentUser }) => {
   }, [dispatch, user._id])
 
   if (!posts) {
-    return <div>loading...</div>
+    return <Loading />
   }
 
   return (
@@ -24,7 +25,7 @@ const PostsGrid = ({ user, isCurrentUser }) => {
           isCurrentUser ? (
             <Post key={post._id} post={post} currentUser={user} />
           ) : (
-            <FollowsPost key={post._id} post={post} currentUser={user} />
+            <ProfilePost key={post._id} post={post} currentUser={user} />
           )
         )}
       </div>

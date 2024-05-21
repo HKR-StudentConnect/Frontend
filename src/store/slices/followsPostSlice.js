@@ -31,7 +31,7 @@ const followsPostSlice = createSlice({
       }
     },
     followsPostCommentUpdated: (state, action) => {
-      const postData = action.payload.data
+      const postData = action.payload
       const index = state.data.findIndex(post => post._id === postData._id)
       if (index !== -1) {
         state.data[index] = postData

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllUsers, suspendUser, unsuspendUser } from '../../api/admin'
+import Loading from '../../components/loading'
 
 const AdminUsersList = () => {
   const [users, setUsers] = useState(null)
@@ -32,7 +33,7 @@ const AdminUsersList = () => {
   }
 
   if (!users) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   return (

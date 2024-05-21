@@ -25,7 +25,7 @@ const FeedProfile = ({ user }) => {
       <div className='flex flex-col items-center'>
         <div className='rounded-full border-8 border-secondary w-36 h-36 mb-4'>
           <ProfilePicture
-            imageUrl={user.profile.profilePictureUrl}
+            imageUrl={user.profile?.profilePictureUrl || null}
             className={'w-full h-full'}
           />
         </div>

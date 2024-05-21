@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AdminPageLayout from '../../layouts/adminPageLayout'
 import { getAllPosts, deleteUserPost } from '../../api/admin'
 import PostComponent from '../../components/admin/postComponent'
+import Loading from '../../components/loading'
 
 const AdminPostList = () => {
   const [posts, setPosts] = useState([])
@@ -27,12 +28,12 @@ const AdminPostList = () => {
   return (
     <AdminPageLayout title={'Posts'}>
       <div className='container mx-auto p-4'>
-        {posts.length > 0 ? (
+        {!posts ? (
+          <Loading />
+        ) : (
           posts.map(post => (
             <PostComponent key={post._id} post={post} onDelete={handleDelete} />
           ))
-        ) : (
-          <div>No posts available</div>
         )}
       </div>
     </AdminPageLayout>

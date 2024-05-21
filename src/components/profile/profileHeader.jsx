@@ -17,7 +17,7 @@ const ProfileHeader = ({ user }) => {
     <div className='sm:bg-background2 sm:p-12 rounded-2xl'>
       <div className='flex md:items-center space-x-8 sm:space-x-16 text-black'>
         <ProfilePicture
-          imageUrl={user.profile.profilePictureUrl}
+          imageUrl={user.profile?.profilePictureUrl || null}
           className={'w-16 md:w-36 h-16 md:h-36 mr-4'}
         />
         <div className='w-1/2'>

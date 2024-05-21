@@ -44,8 +44,10 @@ const FollowsPost = ({ post, currentUser }) => {
 
   const toggleLike = () => {
     if (!likeStatus) {
+      console.log(likeStatus)
       dispatch(likeFollowsPostAction(post._id, currentUser._id))
     } else {
+      console.log(likeStatus)
       dispatch(unlikeFollowsPostAction(post._id, currentUser._id))
     }
   }
