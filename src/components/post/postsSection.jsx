@@ -4,6 +4,7 @@ import CreatePostModal from './createPostModal'
 import { useSelector, useDispatch } from 'react-redux'
 import { getFollowsPosts } from '../../store/actions/followsPostAction'
 import FollowsPost from './followsPost'
+import Loading from '../../components/loading'
 
 const PostsSection = ({ user }) => {
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const PostsSection = ({ user }) => {
   }, [dispatch, followsPosts, user._id])
 
   if (!followsPosts) {
-    return <div>Fetching</div>
+    return <Loading />
   }
 
   return (

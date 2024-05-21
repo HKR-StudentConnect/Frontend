@@ -1,16 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Post from '../post/post'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetchUserPosts } from '../../store/actions/postActions'
 import ProfilePost from '../post/profilePost'
 import Loading from '../../components/loading'
+import { getPosts } from '../../api/post'
 
-const PostsGrid = ({ user, isCurrentUser }) => {
+const PostsGrid = ({ user, currentUser, isCurrentUser }) => {
   const dispatch = useDispatch()
-  const posts = useSelector(state => state.post.data)
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     dispatch(fetchUserPosts(user._id))
+    const fetchPosts = async () => {
+      const data = await getPosts(user._id)
+      setPosts(data)
+    }
+    fetchPosts()
   }, [dispatch, user._id])
 
   if (!posts) {
@@ -23,9 +29,9 @@ const PostsGrid = ({ user, isCurrentUser }) => {
       <div className='grid grid-cols-1 gap-0 sm:gap-4'>
         {posts.map(post =>
           isCurrentUser ? (
-            <Post key={post._id} post={post} currentUser={user} />
+            <Post key={post._id} post={post} currentUser={currentUser} />
           ) : (
-            <ProfilePost key={post._id} post={post} currentUser={user} />
+            <ProfilePost key={post._id} post={post} currentUser={currentUser} />
           )
         )}
       </div>

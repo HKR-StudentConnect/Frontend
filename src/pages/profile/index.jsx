@@ -32,7 +32,11 @@ const Profile = () => {
       ) : (
         <div className='max-w-4xl mx-auto mt-8 p-4 rounded-2xl'>
           <ProfileHeader user={user} />
-          <PostsGrid user={user} isCurrentUser={userId === currentUser._id} />
+          <PostsGrid
+            user={user}
+            currentUser={currentUser}
+            isCurrentUser={userId === currentUser._id}
+          />
         </div>
       )}
     </PageLayout>
