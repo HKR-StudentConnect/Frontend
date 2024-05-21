@@ -7,6 +7,14 @@ https://studentconnecthkr.netlify.app/
 
 ```
 
+link to vercel:
+
+``` bash
+https://frontend-xi-bay-98.vercel.app/welcome
+
+```
+
+
 # Social Media App
 
 Welcome to our Social Media App! This project is a React-based application designed to bring people together, allowing users to connect, share, and engage with each other's content.
