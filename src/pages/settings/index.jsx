@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import PageLayout from '../../layouts/pageLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateUserAction } from '../../store/actions/userActions'
+import { updateUserAction, userLogout } from '../../store/actions/userActions'
+import { deleteUser } from '../../api/user'
 
 const Settings = () => {
   const dispatch = useDispatch()
@@ -55,6 +56,16 @@ const Settings = () => {
     console.log('Form submitted:', data)
     dispatch(updateUserAction(currentUser._id, data))
     setSuccessMessage('User updated successfully!')
+  }
+
+  const handleDelete = async e => {
+    e.preventDefault()
+    const response = await deleteUser(currentUser._id)
+    if (response.status === 200) {
+      dispatch(userLogout())
+    } else {
+      setSuccessMessage('Error delete using account')
+    }
   }
 
   return (
@@ -228,6 +239,12 @@ const Settings = () => {
           </div>
 
           <div className='mt-6 flex items-center justify-end gap-x-6'>
+            <button
+              onClick={handleDelete}
+              className='rounded-md bg-red px-8 py-2 text-md font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+            >
+              Delete Profile
+            </button>
             <button
               type='submit'
               className='rounded-md bg-primary px-8 py-2 text-md font-semibold text-white shadow-sm hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'

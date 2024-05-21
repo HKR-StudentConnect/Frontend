@@ -15,6 +15,18 @@ export const getUserInfo = async userId => {
   }
 }
 
+export const deleteUser = async userId => {
+  try {
+    const response = await baseInstance.delete(`${userSuffix}/${userId}`)
+    return response
+  } catch (error) {
+    if (error.response.status === '401') {
+      resetUser()
+    }
+    console.error('Get Information failed:', error)
+  }
+}
+
 export const updateUserInfo = async (userId, data) => {
   try {
     const response = await baseInstance.put(`${userSuffix}/${userId}`, data)
