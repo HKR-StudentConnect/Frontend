@@ -36,7 +36,7 @@ const Notifications = () => {
           <h1 className='text-2xl md:text-3xl font-semibold mb-4'>
             Notifications
           </h1>
-          <div className='divide-y divide-gray-300'>
+          <div className='flex flex-col space-y-4'>
             {notifications.map(notification => (
               <div
                 key={notification._id}
@@ -46,7 +46,7 @@ const Notifications = () => {
                   <div className='flex'>
                     <ProfilePicture
                       imageUrl={
-                        notification.sender.profile.profilePictureUrl ?? null
+                        notification.sender?.profile?.profilePictureUrl ?? null
                       }
                       className={'w-10 h-10 mr-4'}
                     />
