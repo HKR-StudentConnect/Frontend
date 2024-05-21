@@ -1,6 +1,11 @@
 # Frontend for HKR-StudentConnect
 
 
+link to netlify: 
+``` bash
+https://studentconnecthkr.netlify.app/
+
+```
 
 # Social Media App
 
