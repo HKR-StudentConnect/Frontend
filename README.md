@@ -7,34 +7,25 @@ https://studentconnecthkr.netlify.app/
 
 ```
 
-link to vercel:
+**Project Overview**
 
-``` bash
-https://frontend-xi-bay-98.vercel.app/welcome
+HKR-StudentConnect is a React-based social media application designed to foster a vibrant online community for students at HKR. It empowers users to connect, share ideas, and engage with each other's content.
 
-```
+**Core Functionalities**
 
+- **User Management:** Secure registration, login, and profile management with optional profile pictures.
+- **Content Creation and Interaction:** Share posts, like, and comment on content to spark meaningful conversations and interactions.
+- **Social Connections:** Build your network by sending and accepting friend requests, and view your friends' posts in a dedicated feed.
+- **Real-Time Notifications:** Stay up-to-date on friend requests, likes, and comments on your posts.
+- **Search Functionality:** Easily find other users by name or username to expand your network.
 
-# Social Media App
+**Robust Admin Panel (`/admin`)**
 
-Welcome to our Social Media App! This project is a React-based application designed to bring people together, allowing users to connect, share, and engage with each other's content.
+For authorized administrators, a comprehensive admin panel provides control over the platform:
 
-## Project Description
-
-Our Social Media App provides the following features:
-
-- User Authentication: Users can sign up, log in, and securely authenticate themselves to access the platform.
-- Profile Creation: Users can create their profiles, customize them, and add profile pictures.
-- Posts: Users can create, view, like, and comment on posts shared by others.
-- Friend Connections: Users can send friend requests, accept or reject requests, and view their friends' posts on a separate feed.
-- Notifications: Users receive real-time notifications for friend requests, likes, and comments on their posts.
-- Search Functionality: Users can search for other users by name or username.
-
-Additionally, we have an **Admin Page** accessible at `/admin` where authorized administrators can perform the following tasks:
-
-- User Management: Administrators can view, edit, or delete user accounts.
-- Content Moderation: Administrators can moderate posts, comments, and user-generated content.
-- Analytics: Administrators can access analytics and insights about user activity, engagement metrics, and platform performance.
+- **User Management:** View, edit, or delete user accounts for efficient user management.
+- **Content Moderation:** Maintain a positive user experience by moderating posts, comments, and other user-generated content.
+- **Data-Driven Insights:** Gain valuable analytics and insights on user activity, engagement metrics, and platform performance to inform strategic decision-making.
 
 ## Installation
 
