@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getToken, handleTokenError } from './storage'
 
 const baseInstance = axios.create({
-  baseURL: 'https://backend-gray-six.vercel.app/',
+  baseURL: process.env.REACT_APP_API_URL,
 })
 
 baseInstance.interceptors.request.use(
