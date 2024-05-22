@@ -9,7 +9,7 @@ https://studentconnecthkr.netlify.app/
 
 **Project Overview**
 
-HKR-StudentConnect is a React-based social media application designed to foster a vibrant online community for students at HKR. It empowers users to connect, share ideas, and engage with each other's content.
+HKR-StudentConnect is a React-based social media application designed to foster a vibrant online community for and connect students at HKR with each other. It empowers users to connect, share ideas, share events and engage with each other's content.
 
 **Core Functionalities**
 
